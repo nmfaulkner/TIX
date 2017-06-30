@@ -1,0 +1,22 @@
+{
+  "name": "nick",
+  "version": "1.0.0",
+  "description": "TIX",
+  "main": "index.html",
+  "scripts": {
+    "test": "npmtest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmfaulkner/TIX.git"
+  },
+  "keywords": [
+    "tix"
+  ],
+  "author": "Nick Faulkner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nmfaulkner/TIX/issues"
+  },
+  "homepage": "https://github.com/nmfaulkner/TIX#readme"
+}
