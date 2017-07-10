@@ -14,6 +14,8 @@
         width: 500px;
       }
     </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   </head>
 
   <body>
@@ -24,12 +26,19 @@
       </div>
       <div id="loggedin">
         <div id="user-profile">
+            
         </div>
+          <div id="top-artists">
+          </div>
         <div id="oauth">
         </div>
+          
+            
+<!--
         <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
       </div>
     </div>
+-->
 
     <script id="user-profile-template" type="text/x-handlebars-template">
       <h1>Logged in as {{display_name}}</h1>
@@ -41,28 +50,24 @@
           <dl class="dl-horizontal">
             <dt>Display name</dt><dd class="clearfix">{{display_name}}</dd>
             <dt>Id</dt><dd>{{id}}</dd>
-            <dt>Email</dt><dd>{{email}}</dd>
-            <dt>Spotify URI</dt><dd><a href="{{external_urls.spotify}}">{{external_urls.spotify}}</a></dd>
             <dt>Link</dt><dd><a href="{{href}}">{{href}}</a></dd>
-            <dt>Profile Image</dt><dd class="clearfix"><a href="{{images.0.url}}">{{images.0.url}}</a></dd>
-            <dt>Country</dt><dd>{{country}}</dd>
           </dl>
         </div>
       </div>
     </script>
 
+
     <script id="oauth-template" type="text/x-handlebars-template">
+<!--
       <h2>oAuth info</h2>
       <dl class="dl-horizontal">
         <dt>Access token</dt><dd class="text-overflow">{{access_token}}</dd>
         <dt>Refresh token</dt><dd class="text-overflow">{{refresh_token}}></dd>
       </dl>
+-->
     </script>
-      
-      <script id="top-artists-template" type="text/x-handlebars-template">
-        <h3> Your Top Artists</h3>
-          
-      </script>
+
+
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -87,8 +92,6 @@
             userProfileTemplate = Handlebars.compile(userProfileSource),
             userProfilePlaceholder = document.getElementById('user-profile');
           
-        //var userArtistsSource = document.getElementById()
-
         var oauthSource = document.getElementById('oauth-template').innerHTML,
             oauthTemplate = Handlebars.compile(oauthSource),
             oauthPlaceholder = document.getElementById('oauth');
@@ -114,17 +117,44 @@
                   'Authorization': 'Bearer ' + access_token
                 },
                 success: function(response) {
-                console.log(response.items[7].name);
-                console.log(response.items[3])
                 
-                var len = response.items.length;
+                    var len = response.items.length;
+                    //var hash = [];
+                    var some='<br>';
+                    for (var i = 0; i < len; i++){
+                        
+                       some = some + '<a>' + response.items[i].name + '</a><br>';
+                    }
                     
-                /*for (var i = 0; i < len; i++){
-                    console.log(response.items[i].name);
-                }*/
-                  
+                    document.getElementById('top-artists').innerHTML = '<b>Artists</b>: ' + some;
+
                 }
             });
+              
+//                var app = require( "express" )(),
+//                bodyParser = require( "body-parser" );
+//
+//                app.use( bodyParser.json() );
+//
+//                app.post( "/rate", function( req, res ) {
+//                console.log( req.body.rate );
+//            } );
+              
+//                            
+//                $.ajax({
+//                    type:"GET",
+//                    url:"https://app.ticketmaster.com/discovery/v2/events.json?keyword=BrunoMars&source=universe&countryCode=US&apikey=umM8qIHczvU7iV3hKIkAf2H1eWi4Adjj",
+//                    async:true,
+//                    dataType: "json",
+//                    success: function(json) {
+//                    console.log(json);
+//                  // Parse the response.
+//                  // Do other things.
+//               },
+//                    error: function(xhr, status, err) {
+//                  // This time, we do not end up here!
+//               }
+//            });
 
                 $.ajax({
                     url: 'https://api.spotify.com/v1/me',
@@ -133,7 +163,7 @@
                     },
                     success: function(response) {
                       userProfilePlaceholder.innerHTML = userProfileTemplate(response);
-                      console.log(response);
+                      //console.log(response);
 
                       $('#login').hide();
                       $('#loggedin').show();
@@ -141,8 +171,9 @@
                 });
               
            
-              
-          } else {
+          
+          } 
+            else {
               // render initial screen
               $('#login').show();
               $('#loggedin').hide();
@@ -165,6 +196,68 @@
         }
       })();
     </script>
-      
+          
+          <div class="container">
+      <div class="row">
+        <div class="col-xs-6">
+        <div id='events-panel' class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Events</h3>
+          </div>
+          <div class="panel-body">
+            <div id="events" class="list-group">
+              <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">Event title</h4>
+                <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p class="venue"></p>
+              </a>
+              <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">Event title</h4>
+                <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p class="venue"></p>
+              </a>
+              <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">Event title</h4>
+                <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p class="venue"></p>
+              </a>
+              <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">Event title</h4>
+                <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p class="venue"></p>
+              </a>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <nav>
+              <ul class="pager">
+                <li id="prev" class="previous"><a href="#"><span aria-hidden="true">&larr;</span></a></li>
+                <li id="next" class="next"><a href="#"><span aria-hidden="true">&rarr;</span></a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        
+        <div id='attraction-panel' class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Attraction</h3>
+          </div>
+          <div id="attraction" class="panel-body">
+            <h4 class="list-group-item-heading">Attraction title</h4>
+            <img class="col-xs-12" src="">
+            <p id="classification"></p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+          
+    
+    <script src="/script.js"></script>
+    
   </body>
 </html>
