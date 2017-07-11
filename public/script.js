@@ -1,6 +1,7 @@
 var page = 0;
-
-function getEvents(page) {
+function getEvents(page, artistName) {
+    
+    
 
   $('#events-panel').show();
   $('#attraction-panel').hide();
@@ -15,10 +16,11 @@ function getEvents(page) {
       return;
     }
   }
+    
   
   $.ajax({
     type:"GET",
-    url:"https://app.ticketmaster.com/discovery/v2/events.json?keyword=ladygaga&apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&size=4&page="+page,
+    url:"https://app.ticketmaster.com/discovery/v2/events.json?keyword="+artistName+"&apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&size=4&page="+page,
     async:true,
     dataType: "json",
     success: function(json) {
@@ -30,6 +32,7 @@ function getEvents(page) {
   		   }
   });
 }
+
 
 function showEvents(json) {
   var items = $('#events .list-group-item');
@@ -94,4 +97,4 @@ function showAttraction(json) {
   $('#classification').text(json.classifications[0].segment.name + " - " + json.classifications[0].genre.name + " - " + json.classifications[0].subGenre.name);
 }
 
-getEvents(page);
+getEvents(page, "bieber");

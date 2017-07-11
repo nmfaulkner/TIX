@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Example of the Authorization Code flow with Spotify</title>
+    <title>TIX</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <style type="text/css">
       #login, #loggedin {
@@ -15,7 +15,7 @@
       }
     </style>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
   </head>
 
   <body>
@@ -71,6 +71,7 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
       (function() {
 
@@ -123,7 +124,7 @@
                     var some='<br>';
                     for (var i = 0; i < len; i++){
                         
-                       some = some + '<a>' + response.items[i].name + '</a><br>';
+                       some = some + '<a class="artists"' + '#artistName'+'>' + response.items[i].name + '</a><br>';
                     }
                     
                     document.getElementById('top-artists').innerHTML = '<b>Artists</b>: ' + some;
@@ -131,14 +132,37 @@
                 }
             });
               
-//                var app = require( "express" )(),
-//                bodyParser = require( "body-parser" );
-//
-//                app.use( bodyParser.json() );
-//
-//                app.post( "/rate", function( req, res ) {
-//                console.log( req.body.rate );
-//            } );
+              $(function(){
+                  $('.artists').click(function(){
+                      var artistName = $(this).text();
+                      console.log(artistName);
+                      var page = 0;
+                      var artistData = {'artistName':artistName, 'page' : page}
+                      $.ajax({
+                          data: artistData ,
+                          dataType: 'JSON',
+                          type: 'POST',
+                           url: '/script.js/getEvents',
+                          contentType: 'application/json',
+                          succes: function(result){
+                              console.log("hi")
+                          },
+                          error : function(e) {
+                              alert(e);
+                          }
+                      })
+                          
+                      })
+                      return false;
+                  });
+              
+              
+                
+              
+                
+//              $(document).ready(function(){
+//                  $()
+//              }
               
 //                            
 //                $.ajax({
@@ -179,23 +203,27 @@
               $('#loggedin').hide();
           }
 
-          document.getElementById('obtain-new-token').addEventListener('click', function() {
-            $.ajax({
-              url: '/refresh_token',
-              data: {
-                'refresh_token': refresh_token
-              }
-            }).done(function(data) {
-              access_token = data.access_token;
-              oauthPlaceholder.innerHTML = oauthTemplate({
-                access_token: access_token,
-                refresh_token: refresh_token
-              });
-            });
-          }, false);
+//          document.getElementById('obtain-new-token').addEventListener('click', function() {
+//            $.ajax({
+//              url: '/refresh_token',
+//              data: {
+//                'refresh_token': refresh_token
+//              }
+//            }).done(function(data) {
+//              access_token = data.access_token;
+//              oauthPlaceholder.innerHTML = oauthTemplate({
+//                access_token: access_token,
+//                refresh_token: refresh_token
+//              });
+//            });
+//          }
+//                                                                       
+//                                                                       
+//        , false);
         }
       })();
     </script>
+          
           
           <div class="container">
       <div class="row">
