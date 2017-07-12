@@ -74,7 +74,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
       (function() {
-
         /**
          * Obtains parameters from the hash of the URL
          * @return Object
@@ -88,7 +87,6 @@
           }
           return hashParams;
         }
-
         var userProfileSource = document.getElementById('user-profile-template').innerHTML,
             userProfileTemplate = Handlebars.compile(userProfileSource),
             userProfilePlaceholder = document.getElementById('user-profile');
@@ -96,13 +94,10 @@
         var oauthSource = document.getElementById('oauth-template').innerHTML,
             oauthTemplate = Handlebars.compile(oauthSource),
             oauthPlaceholder = document.getElementById('oauth');
-
         var params = getHashParams();
-
         var access_token = params.access_token,
             refresh_token = params.refresh_token,
             error = params.error;
-
         if (error) {
           alert('There was an error during the authentication');
         } else {
@@ -124,62 +119,12 @@
                     var some='<br>';
                     for (var i = 0; i < len; i++){
                         
-                       some = some + '<a class="artists"' + '#artistName'+'>' + response.items[i].name + '</a><br>';
+                       some = some + '<a href="" class="artists">' + response.items[i].name + '</a><br>';
                     }
                     
                     document.getElementById('top-artists').innerHTML = '<b>Artists</b>: ' + some;
-
                 }
             });
-              
-              $(function(){
-                  $('.artists').click(function(){
-                      var artistName = $(this).text();
-                      console.log(artistName);
-                      var page = 0;
-                      var artistData = {'artistName':artistName, 'page' : page}
-                      $.ajax({
-                          url: 'public/script.js',
-                          data: artistData ,
-                          dataType: 'JSON',
-                          type: 'POST',
-                          contentType: 'application/json',
-                          succes: function(result){
-                              console.log("hi")
-                          },
-                          error : function(e) {
-                              alert(e.status);
-                          }
-                      })
-                          
-                      })
-                      return false;
-                  });
-              
-              
-                
-              
-                
-//              $(document).ready(function(){
-//                  $()
-//              }
-              
-//                            
-//                $.ajax({
-//                    type:"GET",
-//                    url:"https://app.ticketmaster.com/discovery/v2/events.json?keyword=BrunoMars&source=universe&countryCode=US&apikey=umM8qIHczvU7iV3hKIkAf2H1eWi4Adjj",
-//                    async:true,
-//                    dataType: "json",
-//                    success: function(json) {
-//                    console.log(json);
-//                  // Parse the response.
-//                  // Do other things.
-//               },
-//                    error: function(xhr, status, err) {
-//                  // This time, we do not end up here!
-//               }
-//            });
-
                 $.ajax({
                     url: 'https://api.spotify.com/v1/me',
                     headers: {
@@ -188,40 +133,122 @@
                     success: function(response) {
                       userProfilePlaceholder.innerHTML = userProfileTemplate(response);
                       //console.log(response);
-
                       $('#login').hide();
                       $('#loggedin').show();
                     }
                 });
-              
-           
-          
           } 
             else {
               // render initial screen
               $('#login').show();
               $('#loggedin').hide();
           }
-
-//          document.getElementById('obtain-new-token').addEventListener('click', function() {
-//            $.ajax({
-//              url: '/refresh_token',
-//              data: {
-//                'refresh_token': refresh_token
-//              }
-//            }).done(function(data) {
-//              access_token = data.access_token;
-//              oauthPlaceholder.innerHTML = oauthTemplate({
-//                access_token: access_token,
-//                refresh_token: refresh_token
-//              });
-//            });
-//          }
-//                                                                       
-//                                                                       
-//        , false);
         }
       })();
+      $(function(){
+        function clicked(event) {
+              artistName = event.toElement.innerText;
+              console.log(event);
+              console.log(artistName);
+              getEvents(artistName);
+              return false;
+        }
+        $('.artists').click(clicked);
+        var page = 0;
+function getEvents(artistName) {
+    
+    
+  $('#events-panel').show();
+  $('#attraction-panel').hide();
+  if (page < 0) {
+    page = 0;
+    return;
+  }
+  if (page > 0) {
+    if (page > getEvents.json.page.totalPages-1) {
+      page=0;
+      return;
+    }
+  }
+    
+  
+  $.ajax({
+    type:"GET",
+    url:"https://app.ticketmaster.com/discovery/v2/events.json?keyword="+artistName+"&apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&size=4&page="+page,
+    async:true,
+    dataType: "json",
+    success: function(json) {
+          getEvents.json = json;
+          showEvents(json);
+         },
+    error: function(xhr, status, err) {
+          console.log(err);
+         }
+  });
+}
+function showEvents(json) {
+  var items = $('#events .list-group-item');
+  items.hide();
+  var events = json._embedded.events;
+  var item = items.first();
+  for (var i=0;i<events.length;i++) {
+    item.children('.list-group-item-heading').text(events[i].name);
+    item.children('.list-group-item-text').text(events[i].dates.start.localDate);
+    try {
+      item.children('.venue').text(events[i]._embedded.venues[0].name + " in " + events[i]._embedded.venues[0].city.name);
+    } catch (err) {
+      console.log(err);
+    }
+    item.show();
+    item.off("click");
+    item.click(events[i], function(eventObject) {
+      console.log(eventObject.data);
+      try {
+        getAttraction(eventObject.data._embedded.attractions[0].id);
+      } catch (err) {
+      console.log(err);
+      }
+    });
+    item=item.next();
+  }
+}
+$('#prev').click(function() {
+  getEvents(--page);
+});
+$('#next').click(function() {
+  getEvents(++page);
+});
+function getAttraction(id) {
+  $.ajax({
+    type:"GET",
+    url:"https://app.ticketmaster.com/discovery/v2/attractions/"+id+".json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG",
+    async:true,
+    dataType: "json",
+    success: function(json) {
+          showAttraction(json);
+         },
+    error: function(xhr, status, err) {
+          console.log(err);
+         }
+  });
+}
+function showAttraction(json) {
+  $('#events-panel').hide();
+  $('#attraction-panel').show();
+  
+  $('#attraction-panel').click(function() {
+    getEvents(page);
+  });
+  
+  $('#attraction .list-group-item-heading').first().text(json.name);
+  $('#attraction img').first().attr('src',json.images[0].url);
+  $('#classification').text(json.classifications[0].segment.name + " - " + json.classifications[0].genre.name + " - " + json.classifications[0].subGenre.name);
+}
+      });
+       
+    </script>
+    <script>
+      
     </script>
           
           
@@ -265,27 +292,14 @@
             </nav>
           </div>
         </div>
-        
-        <div id='attraction-panel' class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Attraction</h3>
-          </div>
-          <div id="attraction" class="panel-body">
-            <h4 class="list-group-item-heading">Attraction title</h4>
-            <img class="col-xs-12" src="">
-            <p id="classification"></p>
-          </div>
-        </div>
         </div>
       </div>
     </div>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-          
-    
-    <script src="/script.js"></script>
-    
+
   </body>
 </html>
