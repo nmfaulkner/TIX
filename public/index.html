@@ -139,16 +139,16 @@
                       var page = 0;
                       var artistData = {'artistName':artistName, 'page' : page}
                       $.ajax({
+                          url: 'public/script.js',
                           data: artistData ,
                           dataType: 'JSON',
                           type: 'POST',
-                           url: '/script.js/getEvents',
                           contentType: 'application/json',
                           succes: function(result){
                               console.log("hi")
                           },
                           error : function(e) {
-                              alert(e);
+                              alert(e.status);
                           }
                       })
                           
