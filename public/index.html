@@ -66,13 +66,20 @@
       </dl>
 -->
     </script>
-
+          
+     <script id="top-artists-template" type="text/x-handlebars-template">
+        <h3> Your Top Artists</h3>
+          
+      </script>     
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
+        
+        artist = '';
+        
       (function() {
         /**
          * Obtains parameters from the hash of the URL
@@ -145,17 +152,21 @@
           }
         }
       })();
+        
       $(function(){
         function clicked(event) {
               artistName = event.toElement.innerText;
               console.log(event);
               console.log(artistName);
-              getEvents(artistName);
+                var page = 0;
+                artist = artistName;
+              getEvents(page, artistName);
               return false;
         }
         $('.artists').click(clicked);
         var page = 0;
-function getEvents(artistName) {
+          
+function getEvents(page, artistName) {
     
     
   $('#events-panel').show();
@@ -216,7 +227,7 @@ $('#prev').click(function() {
   getEvents(--page);
 });
 $('#next').click(function() {
-  getEvents(++page);
+  getEvents(++page, artist);
 });
 function getAttraction(id) {
   $.ajax({
