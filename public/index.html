@@ -26,16 +26,14 @@
       </div>
       <div id="loggedin">
         <div id="user-profile">
-            
+
         </div>
           <div id="top-artists">
           </div>
         <div id="oauth">
         </div>
-          
-          <script> var example = "coldplay"</script>
-          <button onclick="clicked('{%=example%}')"> Click Me </button>
-            
+
+
 <!--
         <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
       </div>
@@ -68,25 +66,21 @@
       </dl>
 -->
     </script>
-          
+
      <script id="top-artists-template" type="text/x-handlebars-template">
         <h3> Your Top Artists</h3>
-          
-      </script>     
+
+      </script>
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
-        
-        function myFunction(name){
-            console.log(name);
-        };
-        
+
         artist = '';
-        
-      (function() {
+
+      function myFunction() {
         /**
          * Obtains parameters from the hash of the URL
          * @return Object
@@ -103,7 +97,7 @@
         var userProfileSource = document.getElementById('user-profile-template').innerHTML,
             userProfileTemplate = Handlebars.compile(userProfileSource),
             userProfilePlaceholder = document.getElementById('user-profile');
-          
+
         var oauthSource = document.getElementById('oauth-template').innerHTML,
             oauthTemplate = Handlebars.compile(oauthSource),
             oauthPlaceholder = document.getElementById('oauth');
@@ -126,20 +120,22 @@
                   'Authorization': 'Bearer ' + access_token
                 },
                 success: function(response) {
-                
+
                     var len = response.items.length;
                     //var hash = [];
                     var some='<br>';
                     for (var i = 0; i < len; i++){
-                        
+
                         artistName = response.items[i].name;
-                        
-                        
-                       some = some + '<button id="'+artistName+'" class="artists" onclick="clicked()">' + artistName + '</button><br>';
+                        console.log(artistName);
+
+
+                       some = some + '<button class="artists" onclick="clicked(\''+artistName+'\')">' + artistName + '</button><br>';
                     }
+                    console.log(some);
 //                    var element = document.getElementById('top-artists');
 //                    element.innerHTML = '<b>Artists</b>: ' + some;
-                    
+
                     document.getElementById('top-artists').innerHTML = '<b>Artists</b>: ' + some;
                 }
             });
@@ -155,29 +151,30 @@
                       $('#loggedin').show();
                     }
                 });
-          } 
+          }
             else {
               // render initial screen
               $('#login').show();
               $('#loggedin').hide();
           }
         }
-      })();
-        
-        function clicked() {
+      }
+      myFunction();
+
+        function clicked(artistName) {
             console.log("hello");
-            artistName = document.getElementById('').textContent;
+            //artistName = document.getElementById('').textContent;
             var page = 0;
             artist = artistName;
-            getEvents(page, artistName);
+            getEvents(page, artist);
             return false;
         }
 //        $('.artists').click(clicked);
         var page = 0;
-          
+
 function getEvents(page, artistName) {
-    
-    
+
+
   $('#events-panel').show();
   $('#attraction-panel').hide();
   if (page < 0) {
@@ -190,8 +187,8 @@ function getEvents(page, artistName) {
       return;
     }
   }
-    
-  
+
+
   $.ajax({
     type:"GET",
     url:"https://app.ticketmaster.com/discovery/v2/events.json?keyword="+artistName+"&apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&size=4&page="+page,
@@ -255,22 +252,22 @@ function getAttraction(id) {
 function showAttraction(json) {
   $('#events-panel').hide();
   $('#attraction-panel').show();
-  
+
   $('#attraction-panel').click(function() {
     getEvents(page);
   });
-  
+
   $('#attraction .list-group-item-heading').first().text(json.name);
   $('#attraction img').first().attr('src',json.images[0].url);
   $('#classification').text(json.classifications[0].segment.name + " - " + json.classifications[0].genre.name + " - " + json.classifications[0].subGenre.name);
 }
-       
+
     </script>
     <script>
-      
+
     </script>
-          
-          
+
+
           <div class="container">
       <div class="row">
         <div class="col-xs-6">
@@ -319,7 +316,7 @@ function showAttraction(json) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-          
+
           <p id="test">
               hello
           </p>
