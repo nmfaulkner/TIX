@@ -127,12 +127,10 @@
                     for (var i = 0; i < len; i++){
 
                         artistName = response.items[i].name;
-                        console.log(artistName);
 
 
                        some = some + '<button class="artists" onclick="clicked(\''+artistName+'\')">' + artistName + '</button><br>';
                     }
-                    console.log(some);
 //                    var element = document.getElementById('top-artists');
 //                    element.innerHTML = '<b>Artists</b>: ' + some;
 
@@ -162,7 +160,6 @@
       myFunction();
 
         function clicked(artistName) {
-            console.log("hello");
             //artistName = document.getElementById('').textContent;
             var page = 0;
             artist = artistName;
@@ -181,6 +178,7 @@ function getEvents(page, artistName) {
     page = 0;
     return;
   }
+    console.log(page);
   if (page > 0) {
     if (page > getEvents.json.page.totalPages-1) {
       page=0;
@@ -207,6 +205,7 @@ function showEvents(json) {
   var items = $('#events .list-group-item');
   items.hide();
   var events = json._embedded.events;
+    console.log(events);
   var item = items.first();
   for (var i=0;i<events.length;i++) {
     item.children('.list-group-item-heading').text(events[i].name);
@@ -229,10 +228,20 @@ function showEvents(json) {
     item=item.next();
   }
 }
-$('#prev').click(function() {
-  getEvents(--page);
-});
+ function getNext(){
+     //console.log(++page);
+    getEvents(++page, artist);
+ };
+function getPrevious(){
+     //console.log(++page);
+    getEvents(--page, artist);
+ }; 
+        
+//$('#prev').click(function() {
+//  getEvents(--page);
+//});
 $('#next').click(function() {
+    console.log(++page, artist);
   getEvents(++page, artist);
 });
 function getAttraction(id) {
@@ -302,8 +311,8 @@ function showAttraction(json) {
           <div class="panel-footer">
             <nav>
               <ul class="pager">
-                <li id="prev" class="previous"><a href="#"><span aria-hidden="true">&larr;</span></a></li>
-                <li id="next" class="next"><a href="#"><span aria-hidden="true">&rarr;</span></a></li>
+                <li id="prev" class="previous"><button onclick="getPrevious()"><span aria-hidden="true">&larr;</span></button></li>
+                <li id="next" class="next"><button onclick="getNext()"><span aria-hidden="true">&rarr;</span></button></li>
               </ul>
             </nav>
           </div>
