@@ -178,7 +178,7 @@ function getEvents(page, artistName) {
     page = 0;
     return;
   }
-    console.log(page);
+
   if (page > 0) {
     if (page > getEvents.json.page.totalPages-1) {
       page=0;
@@ -194,18 +194,26 @@ function getEvents(page, artistName) {
     dataType: "json",
     success: function(json) {
           getEvents.json = json;
-          showEvents(json);
+          canShowEvents(json);
          },
     error: function(xhr, status, err) {
           console.log(err);
          }
   });
 }
+
+function canShowEvents(json){
+    if(json._embedded != null){
+        showEvents(json);
+    }else{
+        alert("There are no concerts for this artist");
+    };
+}
 function showEvents(json) {
   var items = $('#events .list-group-item');
   items.hide();
-  var events = json._embedded.events;
-    console.log(events);
+    console.log(json);
+    var events = json._embedded.events;
   var item = items.first();
   for (var i=0;i<events.length;i++) {
     item.children('.list-group-item-heading').text(events[i].name);
@@ -240,10 +248,10 @@ function getPrevious(){
 //$('#prev').click(function() {
 //  getEvents(--page);
 //});
-$('#next').click(function() {
-    console.log(++page, artist);
-  getEvents(++page, artist);
-});
+//$('#next').click(function() {
+//    console.log(++page, artist);
+//  getEvents(++page, artist);
+//});
 function getAttraction(id) {
   $.ajax({
     type:"GET",
@@ -269,6 +277,11 @@ function showAttraction(json) {
   $('#attraction .list-group-item-heading').first().text(json.name);
   $('#attraction img').first().attr('src',json.images[0].url);
   $('#classification').text(json.classifications[0].segment.name + " - " + json.classifications[0].genre.name + " - " + json.classifications[0].subGenre.name);
+}
+        
+function noAttraction() {
+    var noTickets = "There are no concerts for this artist";
+    $('#attraction .list-group-item-heading').first().text(noTickets);
 }
 
     </script>
