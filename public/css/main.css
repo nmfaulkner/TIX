@@ -1,14 +1,14 @@
 
 .body{
     background: url("concertBackground.jpg");
-    background-size: cover;
+    background-size:cover;
 }
 
 #login {
     color: #1db954;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
-    background-color: #1a1a1a;
+    background-color: rgba(13, 13, 13, .9);
     width: 650px;
     height: 500px;
     border-radius: 25px;
@@ -16,6 +16,7 @@
     margin-top: 10%;
     margin-left:auto;
     margin-right: auto;
+    
 }
 
 .loginTitle{
@@ -60,5 +61,63 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+.btn a:hover{
+    color: navy;
+    
+}
+
+
+
+#top-artists{
+    background-color: navy;
+}
+
+.topnav{
+    display: flex;
+    height: 70px;
+    background-color: black;
+    overflow: hidden;
+}
+
+* {
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+
+.topnavText{
+    order: 2;
+    float: right;
+    color: white;
+    font-size: 110%;
+    height: 20px;
+    font-family: 'Raleway', sans-serif;
+    margin-right: 25px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.topnavImage{
+    order: 3;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    margin-right: 20px;
+    width: 60px;
+    
+}
+
+.topnavLogo{
+    flex-grow: 2;
+    order: 1;
+    float: left;
+    color: #1db954;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 350%;
+    margin-left: 5%;
+    
+}
+
+
 
 

@@ -3,7 +3,7 @@
   <head>
     <script type="text/javascript" src="https://embed.ticketmaster.com/tm.js"></script>
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans|Josefin+Sans|Raleway" rel="stylesheet">
     <title>TIX</title>
 <!--    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
     <style type="text/css">
@@ -25,16 +25,17 @@
     <div class="container">
       <div id="login">
         <h1 class="loginTitle">Tix</h1>
-          <h2 class="loginSubheading"> The easiest way to find tickets for your favorite artists</h2>
+          <h2 class="loginSubheading"> The easiest way to find tickets for your favorite artists. <br>
+              Powered by
+          </h2>
           <div class="logos">
-              <img src="images/spotifyIcon.png" alt="Spotify Logo" style="width:13%; height:13%;">
-              <img src="images/tickermasterlogo.png" alt="Spotify Logo" style="width:13%; height:13%; margin-left: 4%;">
+              <img src="images/spotifyIcon.png" alt="Spotify Logo" style="width:15%; height:15%;">
+              <img src="images/tickermasterlogo.png" alt="Spotify Logo" style="width:15%; height:15%; margin-left: 4%;">
           </div>
         <a href="/login" class="btn btn-primary">Log in with Spotify</a>
       </div>
       <div id="loggedin">
         <div id="user-profile">
-
         </div>
           <div id="top-artists" style="float:left;width:250px;">
           </div>
@@ -50,11 +51,25 @@
 -->
 
     <script id="user-profile-template" type="text/x-handlebars-template">
-      <h1>Logged in as {{display_name}}</h1>
-      <div class="media">
+        <div class="topnav">
+            <h1 class="topnavLogo">
+                Tix
+            </h1>
+              
+            <div class="topnavText">
+            {{display_name}}
+        </div>
+            <div class="topnavImage">
+            <img src="{{images.0.url}}" hspace="20px" style="width=100%; height:100%;"/>
+        </div>
+        </div>
+<!--      <h1>Logged in as {{display_name}}</h1>-->
+<!--      <div class="media">-->
+<!--
         <div class="pull-left">
           <img class="media-object" width="150" src="{{images.0.url}}" />
-        </div>
+-->
+<!--        </div>-->
         <div class="media-body">
           <dl class="dl-horizontal">
             <dt>Display name</dt><dd class="clearfix">{{display_name}}</dd>
