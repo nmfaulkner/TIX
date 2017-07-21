@@ -38,6 +38,8 @@ var app = express();
 app.use(express.static(__dirname + '/public'))
    .use(cookieParser());
 
+app.use('/', express.static('css'));
+app.use('/', express.static('images'));
 app.get('/login', function(req, res) {
 
   var state = generateRandomString(16);

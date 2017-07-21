@@ -1,0 +1,64 @@
+
+.body{
+    background: url("concertBackground.jpg");
+    background-size: cover;
+}
+
+#login {
+    color: #1db954;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1a1a1a;
+    width: 650px;
+    height: 500px;
+    border-radius: 25px;
+    float: center;
+    margin-top: 10%;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+.loginTitle{
+    padding-top: 50px;
+    font-size: 600%;
+    margin-bottom: 1%;
+}
+
+.loginSubheading{
+    font-size: 100%;
+    font-family: 'Noto Sans', sans-serif;  
+    margin-bottom: 3%;
+}
+
+.logos{
+    margin-bottom: 7%;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+    text-decoration: none;
+}
+
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+

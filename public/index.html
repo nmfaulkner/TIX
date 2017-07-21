@@ -1,8 +1,11 @@
 <!doctype html>
 <html>
   <head>
+    <script type="text/javascript" src="https://embed.ticketmaster.com/tm.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans" rel="stylesheet">
     <title>TIX</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
     <style type="text/css">
       #login, #loggedin {
         display: none;
@@ -18,10 +21,15 @@
 <!--    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
   </head>
 
-  <body>
+  <body class="body">
     <div class="container">
       <div id="login">
-        <h1>Tix</h1>
+        <h1 class="loginTitle">Tix</h1>
+          <h2 class="loginSubheading"> The easiest way to find tickets for your favorite artists</h2>
+          <div class="logos">
+              <img src="images/spotifyIcon.png" alt="Spotify Logo" style="width:13%; height:13%;">
+              <img src="images/tickermasterlogo.png" alt="Spotify Logo" style="width:13%; height:13%; margin-left: 4%;">
+          </div>
         <a href="/login" class="btn btn-primary">Log in with Spotify</a>
       </div>
       <div id="loggedin">
@@ -32,6 +40,7 @@
           </div>
         <div id="oauth">
         </div>
+      
 
 
 <!--
@@ -271,6 +280,7 @@ function showEvents(json) {
     }
     item.show();
     item.off("click");
+    console.log(events[i]);
     item.click(events[i], function(eventObject) {
         var url = eventObject.data.url
         window.location.href = url;
@@ -350,23 +360,23 @@ function noAttraction() {
           <div class="panel-body">
             <div id="events" class="list-group">
               <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading">Event title</h4>
-                <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h4 class="list-group-item-heading"></h4>
+                <p class="list-group-item-text">No artist Selected</p>
                 <p class="venue"></p>
               </a>
               <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading">Event title</h4>
-                <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h4 class="list-group-item-heading"></h4>
+                <p class="list-group-item-text">No artist Selected</p>
                 <p class="venue"></p>
               </a>
               <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading">Event title</h4>
-                <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h4 class="list-group-item-heading"></h4>
+                <p class="list-group-item-text">No artist Selected</p>
                 <p class="venue"></p>
               </a>
               <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading">Event title</h4>
-                <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h4 class="list-group-item-heading"></h4>
+                <p class="list-group-item-text">No artist Selected</p>
                 <p class="venue"></p>
               </a>
             </div>
@@ -388,10 +398,7 @@ function noAttraction() {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-          <p id="test">
-              hello
-          </p>
+    
 
   </body>
 </html>
