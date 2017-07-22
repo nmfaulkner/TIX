@@ -5,7 +5,7 @@
 }
 
 #login {
-    color: #1db954;
+    color: #ff8c03;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
     background-color: rgba(13, 13, 13, .9);
@@ -19,6 +19,11 @@
     
 }
 
+#loginLogo{
+    height: 75px;
+    width: 140px;
+}
+
 .loginTitle{
     padding-top: 50px;
     font-size: 600%;
@@ -28,7 +33,7 @@
 .loginSubheading{
     font-size: 100%;
     font-family: 'Noto Sans', sans-serif;  
-    margin-bottom: 3%;
+    margin-bottom: 100px;
 }
 
 .logos{
@@ -37,12 +42,13 @@
 
 .btn-primary {
     color: #fff;
-    background-color: #428bca;
+    background-color: #1DB954;
     border-color: #357ebd;
     text-decoration: none;
 }
 
 .btn {
+    width: 150px;
     display: inline-block;
     margin-bottom: 0;
     font-weight: 400;
@@ -55,7 +61,7 @@
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.42857143;
-    border-radius: 4px;
+    border-radius: 20px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -70,7 +76,19 @@
 
 
 #top-artists{
-    background-color: navy;
+    width: 40%;
+    float: left;
+    text-align: center;
+    background-color: rgba(13, 13, 13, .9);
+    font-family: 'Catamaran', sans-serif;
+}
+
+.top-artists-heading{
+    color: white;
+    font-size: 40px;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    font-size: 35px;
 }
 
 .topnav{
@@ -87,8 +105,6 @@
 }
 
 .topnavText{
-    order: 2;
-    float: right;
     color: white;
     font-size: 110%;
     height: 20px;
@@ -96,27 +112,158 @@
     margin-right: 25px;
     margin-bottom: 25px;
     margin-top: 25px;
+    margin-left:auto;
 }
 
 .topnavImage{
-    order: 3;
     margin-bottom: 1%;
     margin-top: 1%;
-    margin-right: 20px;
+    margin-right: 10px;
     width: 60px;
     
 }
 
 .topnavLogo{
-    flex-grow: 2;
-    order: 1;
-    float: left;
-    color: #1db954;
+    color: #ff8c03;
     font-family: 'Montserrat', sans-serif;
-    font-size: 350%;
-    margin-left: 5%;
+    font-size: 375%;
+    margin-left: 40px;
+    
     
 }
+
+.tixLogo{
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom:5px;
+}
+
+.artists {
+    color: white;
+    font-family: 'Catamaran', sans-serif;
+    background-color:transparent;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+}
+
+.artists:hover {
+    background-color: rgba(51, 51, 51, .9);
+}
+
+.panel-title{
+    text-align: center;
+    font-family: 'Catamaran', sans-serif;
+    color: white;
+    font-size: 40px;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    font-size: 35px;
+}
+
+.tickets-list{
+    background-color: rgba(13, 13, 13, .9);
+    width: 60%;
+    float: right;
+}
+
+.list-group-item{
+    color:white;
+    height: 100px;
+    width: 100%;
+    border-bottom-style:groove;
+    border-bottom-color: black;
+    font-size: 20px;
+    background-color:transparent;
+}
+
+.pageButtons{
+    text-decoration: none;
+    height: 40px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    list-style-type: none;
+}
+
+.next {
+    width: 70px;
+    height: 40px;
+    margin-left: 5px;
+    background-color: #ff8c03;
+    font-size: 20px;
+    
+}
+
+.previous{
+    width: 70px;
+    height:40px;
+    margin-right: 5px;
+    background-color: #ff8c03;
+    font-size: 20px;
+}
+
+.next:hover{
+    background-color: #cc7000;
+}
+
+.previous:hover {
+    background-color: #cc7000;
+}
+
+footer{
+  text-align: center;
+  height: 85%;
+  background: linear-gradient(#00001a, #00001a, #142952);
+  /*background-color: #00001a;*/
+  padding-top: 10%;
+  font-size: 200%;
+  color: white;
+}
+
+.footerheading{
+  font-family: 'Questrial', sans-serif;
+  font-size: 90%;
+}
+
+
+.fa {
+  padding: 20px;
+  /*width: 6%;
+  height: 13%;*/
+  text-align: center;
+  text-decoration: none;
+  margin-top:auto;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-github {
+  background: white;
+  color: black;
+}
+
+.fa-envelope{
+  background: red;
+  color: white;
+}
+
+
+
 
 
 

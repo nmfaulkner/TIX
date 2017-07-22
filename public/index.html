@@ -3,7 +3,7 @@
   <head>
     <script type="text/javascript" src="https://embed.ticketmaster.com/tm.js"></script>
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans|Josefin+Sans|Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans|Josefin+Sans|Raleway|Catamaran" rel="stylesheet">
     <title>TIX</title>
 <!--    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
     <style type="text/css">
@@ -24,20 +24,17 @@
   <body class="body">
     <div class="container">
       <div id="login">
-        <h1 class="loginTitle">Tix</h1>
-          <h2 class="loginSubheading"> The easiest way to find tickets for your favorite artists. <br>
-              Powered by
+        <h1 class="loginTitle">Tix
+            <img id="loginLogo" src="images/Tix.png" alt="Tix Logo">
+          </h1>
+          <h2 class="loginSubheading"> The easiest way to find tickets for your favorite artists.
           </h2>
-          <div class="logos">
-              <img src="images/spotifyIcon.png" alt="Spotify Logo" style="width:15%; height:15%;">
-              <img src="images/tickermasterlogo.png" alt="Spotify Logo" style="width:15%; height:15%; margin-left: 4%;">
-          </div>
-        <a href="/login" class="btn btn-primary">Log in with Spotify</a>
+        <a href="/login" class="btn btn-primary">Connect to Spotify</a>
       </div>
       <div id="loggedin">
         <div id="user-profile">
         </div>
-          <div id="top-artists" style="float:left;width:250px;">
+          <div id="top-artists">
           </div>
         <div id="oauth">
         </div>
@@ -55,6 +52,10 @@
             <h1 class="topnavLogo">
                 Tix
             </h1>
+            
+            <div class="tixLogo">
+            <img src="images/Tix.png" alt="Spotify Logo" style="width:110px; height:60px;">
+            </div>
               
             <div class="topnavText">
             {{display_name}}
@@ -70,6 +71,7 @@
           <img class="media-object" width="150" src="{{images.0.url}}" />
 -->
 <!--        </div>-->
+<!--
         <div class="media-body">
           <dl class="dl-horizontal">
             <dt>Display name</dt><dd class="clearfix">{{display_name}}</dd>
@@ -77,7 +79,7 @@
             <dt>Link</dt><dd><a href="{{href}}">{{href}}</a></dd>
           </dl>
         </div>
-      </div>
+-->
     </script>
 
 
@@ -91,10 +93,14 @@
 -->
     </script>
 
-     <script id="top-artists-template" type="text/x-handlebars-template">
+<!--
+     <script id="top-artists-template">
+         <div class="top-artist-heading">
         <h3> Your Top Artists</h3>
+          </div>
 
       </script>
+-->
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
@@ -158,7 +164,7 @@
 //                    var element = document.getElementById('top-artists');
 //                    element.innerHTML = '<b>Artists</b>: ' + some;
 
-                    document.getElementById('top-artists').innerHTML = '<b>Artists</b>: ' + some;
+                    document.getElementById('top-artists').innerHTML = '<b class="top-artists-heading">Top-Artists</b>: ' + some;
                 }
             });
                 $.ajax({
@@ -365,7 +371,7 @@ function noAttraction() {
     </script>
 
 
-          <div class="container" style="margin-left:50%;">
+          <div class="tickets-list">
       <div class="row">
         <div class="col-xs-6">
         <div id='events-panel' class="panel panel-primary">
@@ -374,34 +380,44 @@ function noAttraction() {
           </div>
           <div class="panel-body">
             <div id="events" class="list-group">
-              <a href="#" class="list-group-item">
+              <button href="#" class="list-group-item">
                 <h4 class="list-group-item-heading"></h4>
                 <p class="list-group-item-text">No artist Selected</p>
                 <p class="venue"></p>
-              </a>
-              <a href="#" class="list-group-item">
+              </button>
+              <button href="#" class="list-group-item">
                 <h4 class="list-group-item-heading"></h4>
                 <p class="list-group-item-text">No artist Selected</p>
                 <p class="venue"></p>
-              </a>
-              <a href="#" class="list-group-item">
+              </button>
+              <button href="#" class="list-group-item">
                 <h4 class="list-group-item-heading"></h4>
                 <p class="list-group-item-text">No artist Selected</p>
                 <p class="venue"></p>
-              </a>
-              <a href="#" class="list-group-item">
+              </button>
+              <button href="#" class="list-group-item">
                 <h4 class="list-group-item-heading"></h4>
                 <p class="list-group-item-text">No artist Selected</p>
                 <p class="venue"></p>
-              </a>
+              </button>
             </div>
           </div>
           <div class="panel-footer">
             <nav>
+                <div class="pageButtons">
+                    <button id="prev" class="previous" onclick="getPrevious()"><span aria-hidden="true">&larr;</span></button>
+                  <button id="next" class="next" onclick="getNext()"><span aria-hidden="true">&rarr;</span></button>
+                </div>
+<!--
               <ul class="pager">
-                <li id="prev" class="previous"><button onclick="getPrevious()"><span aria-hidden="true">&larr;</span></button></li>
-                <li id="next" class="next"><button onclick="getNext()"><span aria-hidden="true">&rarr;</span></button></li>
+                  
+                  <button id="prev" class="previous" onclick="getPrevious()"><span aria-hidden="true">&larr;</span></button>
+                  <button id="next" class="next" onclick="getNext()"><span aria-hidden="true">&rarr;</span></button>
+                  
+                <li id="prev" class="previous"><button class="previous" onclick="getPrevious()"><span aria-hidden="true">&larr;</span></button></li>
+                <li id="next" class="next"><button class="next" onclick="getNext()"><span aria-hidden="true">&rarr;</span></button></li>
               </ul>
+-->
             </nav>
           </div>
         </div>
@@ -413,6 +429,24 @@ function noAttraction() {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+          
+<!--
+    <footer>
+<div class="footerheading" id="footing">
+  <p>
+   Thanks for visiting my webpage!
+  </p>
+
+  <p>
+     Feel free to contact me
+    </p>
+</div>
+  <a href="mailto:nmfaulkner@gmail.com" class="fa fa-envelope" style="font-size:180%;height:100px;width:100px;"></a>
+  <a href="https://www.linkedin.com/in/nmfaulkner/" class="fa fa-linkedin" style="font-size:180%;height:100px;width:100px;"></a>
+  <a href="https://github.com/nmfaulkner" class="fa fa-github" style="font-size:180%;height:100px;width:100px;"></a>
+
+</footer>
+-->
     
 
   </body>
