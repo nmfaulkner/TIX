@@ -2,6 +2,7 @@
 .body{
     background: url("concertBackground.jpg");
     background-size:cover;
+    min-height: 100%;
 }
 
 #login {
@@ -27,13 +28,13 @@
 .loginTitle{
     padding-top: 50px;
     font-size: 600%;
-    margin-bottom: 1%;
+    margin-bottom: 30px;
 }
 
 .loginSubheading{
     font-size: 100%;
     font-family: 'Noto Sans', sans-serif;  
-    margin-bottom: 100px;
+    margin-bottom: 90px;
 }
 
 .logos{
@@ -76,11 +77,15 @@
 
 
 #top-artists{
+    margin-top: 30px;
+    margin-left: 7%;
     width: 40%;
+    height: 650px;
     float: left;
     text-align: center;
     background-color: rgba(13, 13, 13, .9);
     font-family: 'Catamaran', sans-serif;
+    overflow-y: scroll;
 }
 
 .top-artists-heading{
@@ -142,7 +147,7 @@
     color: white;
     font-family: 'Catamaran', sans-serif;
     background-color:transparent;
-    width: 100%;
+    width: 90%;
     height: 50px;
     font-size: 20px;
 }
@@ -162,19 +167,61 @@
 }
 
 .tickets-list{
-    background-color: rgba(13, 13, 13, .9);
-    width: 60%;
+    margin-top: 30px;
+    margin-right: 7%;
+    background-color: #5d5d5d;
+    width: 40%;
+    height: 648px;
     float: right;
 }
 
 .list-group-item{
     color:white;
-    height: 100px;
+    height: 145px;
     width: 100%;
     border-bottom-style:groove;
     border-bottom-color: black;
     font-size: 20px;
     background-color:transparent;
+    font-family: "TMSans-Bold", Arial; 
+}
+
+.list-group-item-heading{
+    padding-top: 10px;
+/*    float:left;*/
+    font-size:110%;
+    margin-top: 1px;
+    overflow-x: hidden;
+}
+
+.list-group-item-text{
+    font-size: 80%;
+    float: left;
+    width: 60%;
+}
+
+.venue{
+    font-family: "TMSans-Light", Arial;
+    font-size: 70%;
+    float: left;
+    width: 40%;
+}
+
+.price-range{
+    font-size: 80%;
+}
+
+.buyButton {
+    padding-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 5px;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    background-color: #009cde;
+    font-family: "TMSans-Bold";
+    font-size: 15px;
 }
 
 .pageButtons{
@@ -182,8 +229,8 @@
     height: 40px;
     text-align: center;
     margin: 0 auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     list-style-type: none;
 }
 
@@ -213,13 +260,16 @@
 }
 
 footer{
-  text-align: center;
-  height: 85%;
-  background: linear-gradient(#00001a, #00001a, #142952);
-  /*background-color: #00001a;*/
-  padding-top: 10%;
-  font-size: 200%;
-  color: white;
+    text-align: center;
+    height: 100px;
+    background: linear-gradient(#00001a, #00001a, #142952);
+    /*background-color: #00001a;*/
+    padding-top: 10%;
+    font-size: 200%;
+    position: absolute;
+    color: white;
+    display: block;
+    
 }
 
 .footerheading{
