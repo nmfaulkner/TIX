@@ -2,9 +2,12 @@
 <html>
   <head>
     <script type="text/javascript" src="https://embed.ticketmaster.com/tm.js"></script>
+    <title>TIX</title>
+    <link rel="shortcut icon" href="images/Tix.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans|Josefin+Sans|Raleway|Catamaran" rel="stylesheet">
-    <title>TIX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!--    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
     <style type="text/css">
       #login, #loggedin {
@@ -324,12 +327,12 @@ function showEvents(json) {
     var time = getFormattedTime(events[i].dates.start.localTime);
     console.log(time);
       
-//    console.log(events[i].dates.start);
+//    console.log(events[i]);
       
       
 //    console.log(events[i]._embedded.venues[0].address.line1);
 //    var year = date.getFullYear();
-    item.children('.list-group-item-text').text(getDayOfWeek(date) + ", " + getMonth(date) + " "+ day + " , "+ date.getFullYear() + " " + time);
+    item.children('.list-group-item-text').text(getDayOfWeek(date) + ", " + getMonth(date) + " "+ day + " , "+ date.getFullYear() + " at  " + time);
       if(events[i].priceRanges != null){
         item.children('.price-range').text("Price: " + events[i].priceRanges[0].min
       +" - "+ events[i].priceRanges[0].max + " " + events[i].priceRanges[0].currency);
@@ -340,9 +343,11 @@ function showEvents(json) {
 //      + events[i].priceRanges[0].min);
 //      +" - "+ events[i].priceRanges[0].max + " " + events[i].priceRanges[0].currency);
     try {
+    console.log(events[i]);
       item.children('.venue').text(events[i]._embedded.venues[0].name + ", " + events[i]._embedded.venues[0].address.line1 + ", " + events[i]._embedded.venues[0].city.name + ", " + events[i]._embedded.venues[0].state.name);
     } catch (err) {
       console.log(err);
+        item.children('.venue').text("Cannot find location");
     }
     item.show();
     item.off("click");
@@ -410,9 +415,6 @@ function noAttraction() {
 }
 
     </script>
-    <script>
-
-    </script>
 
 
           <div class="tickets-list">
@@ -424,31 +426,38 @@ function noAttraction() {
           </div>
           <div class="panel-body">
             <div id="events" class="list-group">
-              <button href="#" class="list-group-item">
-                <h1 class="list-group-item-heading"></h1>
-                <p class="list-group-item-text">No artist Selected</p>
-                <p class="price-range"></p>
-                <p class="venue"></p>
-              </button>
-              <button href="#" class="list-group-item">
+              <div class="list-group-item">
+                <div class="list-group-item-heading">
+                    
+                  </div>
+                <div class="list-group-item-text">No artist Selected</div>
+                 <div class="price-range"></div> 
+                <div class="venue"></div>
+                 <a href="#" class="buyButton" > BUY NOW </a> 
+              </div>
+<!--
+              <div href="#" class="list-group-item">
                 <h1 class="list-group-item-heading"></h1>
                 <p class="list-group-item-text">No artist Selected</p>
                 <p class="price-range"></p>
                 <p class="venue"></p>
                 <a class="buyButton" href="https://google.com"> BUY NOW </a>
-              </button>
-              <button href="#" class="list-group-item">
+              </div>
+              <div href="#" class="list-group-item">
                 <h1 class="list-group-item-heading"></h1>
                 <p class="list-group-item-text">No artist Selected</p>
                 <p class="price-range"></p>
                 <p class="venue"></p>
-              </button>
-              <button href="#" class="list-group-item">
+                <a class="buyButton" href="https://google.com"> BUY NOW </a>
+              </div>
+              <div href="#" class="list-group-item">
                 <h1 class="list-group-item-heading"></h1>
                 <p class="list-group-item-text">No artist Selected</p>
                 <p class="price-range"></p>
                 <p class="venue"></p>
-              </button>
+                <a class="buyButton" href="https://google.com"> BUY NOW </a>
+              </div>
+-->
             </div>
           </div>
           <div class="panel-footer">
@@ -482,29 +491,26 @@ function noAttraction() {
 -->
           
           
+<!--
     <div w-type="event-discovery" w-tmapikey="UT2W2q9vn88jkSFKJmioRT4GplnM9VHX" w-googleapikey="YOUR_GOOGLE_API_KEY" w-keyword="" w-theme="listview" w-colorscheme="dark" w-width="350" w-height="600" w-size="25" w-border="2" w-borderradius="4" w-postalcode="" w-radius="" w-period="week" w-layout="vertical" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="custom" w-titlelink="off" w-countrycode="US" w-source="" w-latlong=""></div>
           
           
     <script src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
-          
-<!--
-    <footer>
-<div class="footerheading" id="footing">
-  <p>
-   Thanks for visiting my webpage!
-  </p>
-
-  <p>
-     Feel free to contact me
-    </p>
-</div>
-  <a href="mailto:nmfaulkner@gmail.com" class="fa fa-envelope" style="font-size:180%;height:100px;width:100px;"></a>
-  <a href="https://www.linkedin.com/in/nmfaulkner/" class="fa fa-linkedin" style="font-size:180%;height:100px;width:100px;"></a>
-  <a href="https://github.com/nmfaulkner" class="fa fa-github" style="font-size:180%;height:100px;width:100px;"></a>
-
-</footer>
 -->
+        
+        
+     <div style="clear: both"></div>   
+    <footer>
+        
+     <div class="contacts">
+    <a href="https://www.linkedin.com/in/nmfaulkner/" class="fa fa-linkedin"></a>
+    <a href="https://github.com/nmfaulkner" class="fa fa-github"></a>
+        </div>
+        
+    </footer>
     
 
   </body>
+        
+        
 </html>

@@ -1,7 +1,7 @@
 
 .body{
     background: url("concertBackground.jpg");
-    background-size:cover;
+    background-size:auto;
     min-height: 100%;
 }
 
@@ -176,52 +176,78 @@
 }
 
 .list-group-item{
+    display: flex;
     color:white;
     height: 145px;
     width: 100%;
     border-bottom-style:groove;
-    border-bottom-color: black;
+    border-bottom-color: rgba(80,80,80,.4);
     font-size: 20px;
     background-color:transparent;
     font-family: "TMSans-Bold", Arial; 
+    flex-direction: column;
 }
 
 .list-group-item-heading{
-    padding-top: 10px;
-/*    float:left;*/
+    overflow-x: scroll;
+    width: auto;
+    white-space: nowrap;
+    display: inline-block;
     font-size:110%;
-    margin-top: 1px;
-    overflow-x: hidden;
+    margin-top: 5px;
+    width:200%;
+    max-height: 30px;
+    margin-left: 8px;
 }
+
 
 .list-group-item-text{
-    font-size: 80%;
-    float: left;
-    width: 60%;
+    order: 1;
+    display:block;
+    clear:both;
+    font-size: 15px;
+    height: 30px;
+    width: 50%;
+    margin-top: 15px;
+    margin-left: 8px;
 }
 
+
 .venue{
+    order: 3;
+    margin-top: 10px;
     font-family: "TMSans-Light", Arial;
     font-size: 70%;
+    margin-left: 8px;
+    width: 50%;
+/*
     float: left;
-    width: 40%;
+    width: 100px;
+    height:20px;
+*/
 }
 
 .price-range{
+    right:0;
+    
+    order:2;
     font-size: 80%;
+    width: 30%;
+/*    height:20px;*/
 }
 
 .buyButton {
-    padding-top: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 5px;
+    text-align: center;
+    padding-top:7px;
     color: white;
     text-decoration: none;
     border-radius: 4px;
     background-color: #009cde;
     font-family: "TMSans-Bold";
     font-size: 15px;
+    width:90px;
+    height: 25px;
+    margin-right:15px;
 }
 
 .pageButtons{
@@ -238,7 +264,7 @@
     width: 70px;
     height: 40px;
     margin-left: 5px;
-    background-color: #ff8c03;
+    background-color: #808080;
     font-size: 20px;
     
 }
@@ -247,28 +273,39 @@
     width: 70px;
     height:40px;
     margin-right: 5px;
-    background-color: #ff8c03;
+    background-color: #808080;
     font-size: 20px;
 }
 
 .next:hover{
-    background-color: #cc7000;
+    background-color: #bfbfbf;
 }
 
 .previous:hover {
-    background-color: #cc7000;
+    background-color: #bfbfbf;
 }
 
+.topRow{
+    margin-top:5px;
+    
+}
+
+
+/*
 footer{
+    width:100%;
+    position:fixed;
+    margin-top: -180px;
+    bottom:0px;
     text-align: center;
-    height: 100px;
+    height: 200px;
     background: linear-gradient(#00001a, #00001a, #142952);
-    /*background-color: #00001a;*/
+    background-color: #00001a;
     padding-top: 10%;
     font-size: 200%;
-    position: absolute;
     color: white;
     display: block;
+
     
 }
 
@@ -280,8 +317,8 @@ footer{
 
 .fa {
   padding: 20px;
-  /*width: 6%;
-  height: 13%;*/
+  width: 6%;
+  height: 13%;
   text-align: center;
   text-decoration: none;
   margin-top:auto;
@@ -311,6 +348,48 @@ footer{
   background: red;
   color: white;
 }
+*/
+
+footer{
+    margin-top:20%;
+    height: 500px;
+    background-color: black;
+    
+}
+
+.intellectualProperty{
+    text-align: center;
+    color: white;
+    padding-top: 100px;
+    
+}
+
+.contacts{
+    text-align: center;
+}
+
+.fa {
+    width:70px;
+    height:70px;
+    text-decoration: none;
+    font-size:30px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.fa-github {
+  background: white;
+  color: rebeccapurple;
+}
+
+
 
 
 
