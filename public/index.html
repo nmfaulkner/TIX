@@ -5,7 +5,7 @@
     <title>TIX</title>
     <link rel="shortcut icon" href="images/Tix.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans|Josefin+Sans|Raleway|Catamaran|Open+Sans|Source+Sans+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans|Josefin+Sans|Raleway|Catamaran|Open+Sans|Source+Sans+Pro|PT+Sans:700|Roboto:300" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!--    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
@@ -244,6 +244,7 @@ function canShowEvents(json) {
             item.children('.list-group-item-heading').text("There are no concerts for this artist");
             item.children('.list-group-item-text').text("");
             item.children('.venue').text("");
+            item.children('.price-range').text("");
             item.show();
             item = item.next();
         }
@@ -251,6 +252,7 @@ function canShowEvents(json) {
             item.children('.list-group-item-heading').text("");
             item.children('.list-group-item-text').text("");
             item.children('.venue').text("");
+            item.children('.price-range').text("");
             item.show();
             item = item.next();
         }
@@ -332,6 +334,9 @@ function showEvents(json) {
         //    console.log(events[i]._embedded.venues[0].address.line1);
         //    var year = date.getFullYear();
         item.children('.list-group-item-text').text(getDayOfWeek(date) + ", " + getMonth(date) + " " + day + " , " + date.getFullYear() + " at  " + time);
+        
+        item.children('.nick').innerHTML = '<a href="#" class="buyButton"> BUY NOW </a>';
+        
         if (events[i].priceRanges != null) {
             item.children('.price-range').text("Price: " + events[i].priceRanges[0].min +
                 " - " + events[i].priceRanges[0].max + " " + events[i].priceRanges[0].currency);
@@ -428,36 +433,41 @@ function noAttraction() {
           <div class="panel-body">
             <div id="events" class="list-group">
               <div class="list-group-item">
-                  <div class="list-group-item-heading">No artist Selected </div>
-                  <br>
-                  <div class="list-group-item-text"></div>
-                 <!-- <div class="price-range"></div>
-                <div class="venue"></div>
-                 <a href="#" class="buyButton" > BUY NOW </a> -->
+                    <div class="list-group-item-heading">No artist Selected </div>
+                    <div class="list-group-item-text">
+                    </div>
+                    <div class="price-range"> </div>
+                    <div class="venue"> </div>
+                    <div class="nick">
+                    </div>
                </div>
-<!--
               <div href="#" class="list-group-item">
-                <h1 class="list-group-item-heading"></h1>
-                <p class="list-group-item-text">No artist Selected</p>
-                <p class="price-range"></p>
-                <p class="venue"></p>
-                <a class="buyButton" href="https://google.com"> BUY NOW </a>
+                    <div class="list-group-item-heading">No artist Selected </div>
+                    <div class="list-group-item-text">
+                    </div>
+                    <div class="price-range"> </div>
+                    <div class="venue"> </div>
+                    <div class="nick">
+                    </div>
               </div>
               <div href="#" class="list-group-item">
-                <h1 class="list-group-item-heading"></h1>
-                <p class="list-group-item-text">No artist Selected</p>
-                <p class="price-range"></p>
-                <p class="venue"></p>
-                <a class="buyButton" href="https://google.com"> BUY NOW </a>
+                    <div class="list-group-item-heading">No artist Selected </div>
+                    <div class="list-group-item-text">
+                    </div>
+                    <div class="price-range"> </div>
+                    <div class="venue"> </div>
+                    <div class="nick">
+                    </div>
               </div>
               <div href="#" class="list-group-item">
-                <h1 class="list-group-item-heading"></h1>
-                <p class="list-group-item-text">No artist Selected</p>
-                <p class="price-range"></p>
-                <p class="venue"></p>
-                <a class="buyButton" href="https://google.com"> BUY NOW </a>
-              </div>
--->
+                    <div class="list-group-item-heading">No artist Selected </div>
+                    <div class="list-group-item-text">
+                    </div>
+                    <div class="price-range"> </div>
+                    <div class="venue"> </div>
+                    <div class="nick">
+                    </div>              
+                </div>
             </div>
           </div>
           <div class="panel-footer">
@@ -465,7 +475,14 @@ function noAttraction() {
                 <div class="pageButtons">
                     <button id="prev" class="previous" onclick="getPrevious()"><span aria-hidden="true">&larr;</span></button>
                   <button id="next" class="next" onclick="getNext()"><span aria-hidden="true">&rarr;</span></button>
+<!--
+                    <div class="ticketmaster">
+                     Powered by 
+                    </div>
+-->
+                                        
                 </div>
+                <img id="ticketmasterLogo" href="images/tickermasterlogo.png" alt="ticketmaster">  
 <!--
               <ul class="pager">
 
@@ -495,9 +512,9 @@ function noAttraction() {
     <div w-type="event-discovery" w-tmapikey="UT2W2q9vn88jkSFKJmioRT4GplnM9VHX" w-googleapikey="YOUR_GOOGLE_API_KEY" w-keyword="" w-theme="listview" w-colorscheme="dark" w-width="350" w-height="600" w-size="25" w-border="2" w-borderradius="4" w-postalcode="" w-radius="" w-period="week" w-layout="vertical" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="custom" w-titlelink="off" w-countrycode="US" w-source="" w-latlong=""></div>
 
 
+
     <script src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
 -->
-
 
      <div style="clear: both"></div>
     <footer>
