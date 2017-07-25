@@ -5,7 +5,7 @@
     <title>TIX</title>
     <link rel="shortcut icon" href="images/Tix.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans|Josefin+Sans|Raleway|Catamaran" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans|Josefin+Sans|Raleway|Catamaran|Open+Sans|Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!--    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
@@ -41,7 +41,7 @@
           </div>
         <div id="oauth">
         </div>
-      
+
 
 
 <!--
@@ -55,11 +55,11 @@
             <h1 class="topnavLogo">
                 Tix
             </h1>
-            
+
             <div class="tixLogo">
             <img src="images/Tix.png" alt="Spotify Logo" style="width:110px; height:60px;">
             </div>
-              
+
             <div class="topnavText">
             {{display_name}}
         </div>
@@ -269,11 +269,11 @@ function canShowEvents(json){
 //            item.show();
 //            item=item.next();
 //        };
-        
-        
-        
-        
-        
+
+
+
+
+
 //        for (var i=0;i<events.length;i++) {
 //        item.children('.list-group-item-heading').text("There are no concerts for this artist");
 //        item.children('.list-group-item-text').text("There are no concerts for this artist");
@@ -287,12 +287,12 @@ function canShowEvents(json){
 //    };
 }
 }
-        
+
 function getDayOfWeek(date) {
-  var dayOfWeek = date.getDay();   
+  var dayOfWeek = date.getDay();
   return isNaN(dayOfWeek) ? null : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][dayOfWeek];
 }
-        
+
 function getMonth(date){
     var month = date.getMonth();
     return isNaN(month) ? null : ["January", "February", "March", "April", "May", "June",
@@ -307,8 +307,8 @@ function getFormattedTime(fourDigitTime) {
 
     return hours + minutes + amPm;
 };
-        
-        
+
+
 function showEvents(json) {
   var items = $('#events .list-group-item');
   items.hide();
@@ -316,20 +316,20 @@ function showEvents(json) {
   var item = items.first();
   for (var i=0;i<events.length;i++) {
     item.children('.list-group-item-heading').text(events[i].name);
-      
+
     var monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"];
     var date = new Date(events[i].dates.start.localDate);
 //    var day = getDayOfWeek(date);
 //    var month = getMonth(date);
     var day = date.getDate()+1;
-      
+
     var time = getFormattedTime(events[i].dates.start.localTime);
     console.log(time);
-      
+
 //    console.log(events[i]);
-      
-      
+
+
 //    console.log(events[i]._embedded.venues[0].address.line1);
 //    var year = date.getFullYear();
     item.children('.list-group-item-text').text(getDayOfWeek(date) + ", " + getMonth(date) + " "+ day + " , "+ date.getFullYear() + " at  " + time);
@@ -373,8 +373,8 @@ function showEvents(json) {
 function getPrevious(){
      //console.log(++page);
     getEvents(--page, artist);
- }; 
-        
+ };
+
 //$('#prev').click(function() {
 //  getEvents(--page);
 //});
@@ -408,7 +408,7 @@ function showAttraction(json) {
   $('#attraction img').first().attr('src',json.images[0].url);
   $('#classification').text(json.classifications[0].segment.name + " - " + json.classifications[0].genre.name + " - " + json.classifications[0].subGenre.name);
 }
-        
+
 function noAttraction() {
     var noTickets = "There are no concerts for this artist";
     $('#attraction .list-group-item-heading').first().text(noTickets);
@@ -427,14 +427,13 @@ function noAttraction() {
           <div class="panel-body">
             <div id="events" class="list-group">
               <div class="list-group-item">
-                <div class="list-group-item-heading">
-                    
-                  </div>
-                <div class="list-group-item-text">No artist Selected</div>
-                 <div class="price-range"></div> 
+                  <div class="list-group-item-heading">No artist Selected </div>
+                  <br>
+                  <div class="list-group-item-text"></div>
+                 <!-- <div class="price-range"></div>
                 <div class="venue"></div>
-                 <a href="#" class="buyButton" > BUY NOW </a> 
-              </div>
+                 <a href="#" class="buyButton" > BUY NOW </a> -->
+               </div>
 <!--
               <div href="#" class="list-group-item">
                 <h1 class="list-group-item-heading"></h1>
@@ -468,10 +467,10 @@ function noAttraction() {
                 </div>
 <!--
               <ul class="pager">
-                  
+
                   <button id="prev" class="previous" onclick="getPrevious()"><span aria-hidden="true">&larr;</span></button>
                   <button id="next" class="next" onclick="getNext()"><span aria-hidden="true">&rarr;</span></button>
-                  
+
                 <li id="prev" class="previous"><button class="previous" onclick="getPrevious()"><span aria-hidden="true">&larr;</span></button></li>
                 <li id="next" class="next"><button class="next" onclick="getNext()"><span aria-hidden="true">&rarr;</span></button></li>
               </ul>
@@ -486,31 +485,43 @@ function noAttraction() {
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!--
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-     Latest compiled and minified JavaScript 
+     Latest compiled and minified JavaScript
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 -->
-          
-          
+
+
 <!--
     <div w-type="event-discovery" w-tmapikey="UT2W2q9vn88jkSFKJmioRT4GplnM9VHX" w-googleapikey="YOUR_GOOGLE_API_KEY" w-keyword="" w-theme="listview" w-colorscheme="dark" w-width="350" w-height="600" w-size="25" w-border="2" w-borderradius="4" w-postalcode="" w-radius="" w-period="week" w-layout="vertical" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="custom" w-titlelink="off" w-countrycode="US" w-source="" w-latlong=""></div>
-          
-          
+
+
     <script src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
 -->
-        
-        
-     <div style="clear: both"></div>   
+
+
+     <div style="clear: both"></div>
     <footer>
-        
+
+      <div class="footerText">
+        <p>
+          Tix was created by Nick Faulkner. Feel free to reach out Nick:
+        </p>
+      </div>
+
      <div class="contacts">
-    <a href="https://www.linkedin.com/in/nmfaulkner/" class="fa fa-linkedin"></a>
-    <a href="https://github.com/nmfaulkner" class="fa fa-github"></a>
+    <a href="https://www.linkedin.com/in/nmfaulkner/" class="fa fa-linkedin" style="font-size:45px;"></a>
+    <a href="https://github.com/nmfaulkner" style="font-size:45px;" class="fa fa-github"></a>
         </div>
-        
+
+        <div class="copyright">
+        <p>
+          &copy; 2017 Nick Faulkner. All Rights Reserved
+        </p>
+      </div>
+
     </footer>
-    
+
 
   </body>
-        
-        
+
+
 </html>

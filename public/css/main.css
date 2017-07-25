@@ -17,7 +17,7 @@
     margin-top: 10%;
     margin-left:auto;
     margin-right: auto;
-    
+
 }
 
 #loginLogo{
@@ -33,7 +33,7 @@
 
 .loginSubheading{
     font-size: 100%;
-    font-family: 'Noto Sans', sans-serif;  
+    font-family: 'Noto Sans', sans-serif;
     margin-bottom: 90px;
 }
 
@@ -71,7 +71,7 @@
 
 .btn a:hover{
     color: navy;
-    
+
 }
 
 
@@ -125,7 +125,7 @@
     margin-top: 1%;
     margin-right: 10px;
     width: 60px;
-    
+
 }
 
 .topnavLogo{
@@ -133,8 +133,8 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 375%;
     margin-left: 40px;
-    
-    
+
+
 }
 
 .tixLogo{
@@ -184,11 +184,10 @@
     border-bottom-color: rgba(80,80,80,.4);
     font-size: 20px;
     background-color:transparent;
-    font-family: "TMSans-Bold", Arial; 
-    flex-direction: column;
+    font-family: "TMSans-Bold", Arial;
 }
 
-.list-group-item-heading{
+/*.list-group-item-heading{
     overflow-x: scroll;
     width: auto;
     white-space: nowrap;
@@ -202,14 +201,12 @@
 
 
 .list-group-item-text{
-    order: 1;
-    display:block;
-    clear:both;
-    font-size: 15px;
-    height: 30px;
-    width: 50%;
-    margin-top: 15px;
-    margin-left: 8px;
+  display: inline-block;
+  width: 150px;
+  height: 75px;
+  margin: 10px;
+  border: 3px solid #73AD21;
+
 }
 
 
@@ -220,20 +217,14 @@
     font-size: 70%;
     margin-left: 8px;
     width: 50%;
-/*
-    float: left;
-    width: 100px;
-    height:20px;
-*/
 }
 
 .price-range{
     right:0;
-    
+
     order:2;
     font-size: 80%;
     width: 30%;
-/*    height:20px;*/
 }
 
 .buyButton {
@@ -248,7 +239,59 @@
     width:90px;
     height: 25px;
     margin-right:15px;
+}*/
+
+
+
+
+
+.list-group-item-heading{
+    display: inline-block;
+    border: 3px solid red;
+    height:20px;
+    width:220%;
 }
+
+
+.list-group-item-text{
+    display: inline-block;
+    width: 300px;
+    height: 10px;
+    margin: 10px;
+    border: 3px solid red;
+    margin-top: 40px;
+    float: left;
+}
+
+
+.venue{
+  display: inline-block;
+  width: 300px;
+  height: 75px;
+  margin: 10px;
+  border: 3px solid red;
+}
+
+.price-range{
+    display: inline-block;
+    width: 300px;
+    height: 75px;
+    margin: 10px;
+    border: 3px solid red;
+}
+
+.buyButton {
+    display: inline-block;
+    width: 300px;
+    height: 75px;
+    margin: 10px;
+    border: 3px solid red;
+}
+
+
+
+
+
 
 .pageButtons{
     text-decoration: none;
@@ -266,7 +309,7 @@
     margin-left: 5px;
     background-color: #808080;
     font-size: 20px;
-    
+
 }
 
 .previous{
@@ -287,7 +330,7 @@
 
 .topRow{
     margin-top:5px;
-    
+
 }
 
 
@@ -306,7 +349,7 @@ footer{
     color: white;
     display: block;
 
-    
+
 }
 
 .footerheading{
@@ -354,25 +397,26 @@ footer{
     margin-top:20%;
     height: 500px;
     background-color: black;
-    
+    font-family: 'Raleway', sans-serif;
 }
 
 .intellectualProperty{
     text-align: center;
     color: white;
     padding-top: 100px;
-    
+
 }
 
 .contacts{
     text-align: center;
+    margin-top:40px;
 }
 
 .fa {
-    width:70px;
-    height:70px;
+    padding-top: 15px;
+    width:80px;
+    height:60px;
     text-decoration: none;
-    font-size:30px;
 }
 
 .fa:hover {
@@ -382,18 +426,26 @@ footer{
 .fa-linkedin {
   background: #007bb5;
   color: white;
+  font-size:50px;
+  margin-right:3px;
 }
 
 .fa-github {
   background: white;
   color: rebeccapurple;
+  margin-left: 3px;
 }
 
+.footerText{
+  color:white;
+  text-align:center;
+  padding-top:150px;
+  /*font-family: 'Catamaran', sans-serif;*/
+  font-size:20px;
+}
 
-
-
-
-
-
-
-
+.copyright{
+  color:white;
+  text-align:center;
+  margin-top:80px;
+}
