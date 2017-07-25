@@ -106,201 +106,199 @@
 -->
 
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+artist = '';
 
-        artist = '';
-
-      function myFunction() {
-        /**
-         * Obtains parameters from the hash of the URL
-         * @return Object
-         */
-        function getHashParams() {
-          var hashParams = {};
-          var e, r = /([^&;=]+)=?([^&;]*)/g,
-              q = window.location.hash.substring(1);
-          while ( e = r.exec(q)) {
-             hashParams[e[1]] = decodeURIComponent(e[2]);
-          }
-          return hashParams;
+function myFunction() {
+    /**
+     * Obtains parameters from the hash of the URL
+     * @return Object
+     */
+    function getHashParams() {
+        var hashParams = {};
+        var e, r = /([^&;=]+)=?([^&;]*)/g,
+            q = window.location.hash.substring(1);
+        while (e = r.exec(q)) {
+            hashParams[e[1]] = decodeURIComponent(e[2]);
         }
-        var userProfileSource = document.getElementById('user-profile-template').innerHTML,
-            userProfileTemplate = Handlebars.compile(userProfileSource),
-            userProfilePlaceholder = document.getElementById('user-profile');
+        return hashParams;
+    }
+    var userProfileSource = document.getElementById('user-profile-template').innerHTML,
+        userProfileTemplate = Handlebars.compile(userProfileSource),
+        userProfilePlaceholder = document.getElementById('user-profile');
 
-        var oauthSource = document.getElementById('oauth-template').innerHTML,
-            oauthTemplate = Handlebars.compile(oauthSource),
-            oauthPlaceholder = document.getElementById('oauth');
-        var params = getHashParams();
-        var access_token = params.access_token,
-            refresh_token = params.refresh_token,
-            error = params.error;
-        if (error) {
-          alert('There was an error during the authentication');
-        } else {
-          if (access_token) {
+    var oauthSource = document.getElementById('oauth-template').innerHTML,
+        oauthTemplate = Handlebars.compile(oauthSource),
+        oauthPlaceholder = document.getElementById('oauth');
+    var params = getHashParams();
+    var access_token = params.access_token,
+        refresh_token = params.refresh_token,
+        error = params.error;
+    if (error) {
+        alert('There was an error during the authentication');
+    } else {
+        if (access_token) {
             // render oauth info
             oauthPlaceholder.innerHTML = oauthTemplate({
-              access_token: access_token,
-              refresh_token: refresh_token
+                access_token: access_token,
+                refresh_token: refresh_token
             });
-                   $.ajax({
+            $.ajax({
                 url: 'https://api.spotify.com/v1/me/top/artists',
                 headers: {
-                  'Authorization': 'Bearer ' + access_token
+                    'Authorization': 'Bearer ' + access_token
                 },
                 success: function(response) {
 
                     var len = response.items.length;
                     //var hash = [];
-                    var some='<br>';
-                    for (var i = 0; i < len; i++){
+                    var some = '<br>';
+                    for (var i = 0; i < len; i++) {
 
                         artistName = response.items[i].name;
 
 
-                       some = some + '<button class="artists" onclick="clicked(\''+artistName+'\')">' + artistName + '</button><br>';
+                        some = some + '<button class="artists" onclick="clicked(\'' + artistName + '\')">' + artistName + '</button><br>';
                     }
-//                    var element = document.getElementById('top-artists');
-//                    element.innerHTML = '<b>Artists</b>: ' + some;
+                    //                    var element = document.getElementById('top-artists');
+                    //                    element.innerHTML = '<b>Artists</b>: ' + some;
 
                     document.getElementById('top-artists').innerHTML = '<b class="top-artists-heading">Your Top Artists</b>: ' + some;
                 }
             });
-                $.ajax({
-                    url: 'https://api.spotify.com/v1/me',
-                    headers: {
-                      'Authorization': 'Bearer ' + access_token
-                    },
-                    success: function(response) {
-                      userProfilePlaceholder.innerHTML = userProfileTemplate(response);
-                      //console.log(response);
-                      $('#login').hide();
-                      $('#loggedin').show();
-                    }
-                });
-          }
-            else {
-              // render initial screen
-              $('#login').show();
-              $('#loggedin').hide();
-          }
+            $.ajax({
+                url: 'https://api.spotify.com/v1/me',
+                headers: {
+                    'Authorization': 'Bearer ' + access_token
+                },
+                success: function(response) {
+                    userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+                    //console.log(response);
+                    $('#login').hide();
+                    $('#loggedin').show();
+                }
+            });
+        } else {
+            // render initial screen
+            $('#login').show();
+            $('#loggedin').hide();
         }
-      }
-      myFunction();
+    }
+}
+myFunction();
 
-        function clicked(artistName) {
-            //artistName = document.getElementById('').textContent;
-            var page = 0;
-            artist = artistName;
-            getEvents(page, artist);
-            return false;
-        }
+function clicked(artistName) {
+    //artistName = document.getElementById('').textContent;
+    var page = 0;
+    artist = artistName;
+    getEvents(page, artist);
+    return false;
+}
 //        $('.artists').click(clicked);
-        var page = 0;
+var page = 0;
 
 function getEvents(page, artistName) {
 
 
-  $('#events-panel').show();
-  $('#attraction-panel').hide();
-  if (page < 0) {
-    page = 0;
-    return;
-  }
-
-  if (page > 0) {
-    if (page > getEvents.json.page.totalPages-1) {
-      page=0;
-      return;
+    $('#events-panel').show();
+    $('#attraction-panel').hide();
+    if (page < 0) {
+        page = 0;
+        return;
     }
-  }
+
+    if (page > 0) {
+        if (page > getEvents.json.page.totalPages - 1) {
+            page = 0;
+            return;
+        }
+    }
 
 
-  $.ajax({
-    type:"GET",
-    url:"https://app.ticketmaster.com/discovery/v2/events.json?keyword="+artistName+"&apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&size=4&page="+page,
-    async:true,
-    dataType: "json",
-    success: function(json) {
-          getEvents.json = json;
-          canShowEvents(json);
-         },
-    error: function(xhr, status, err) {
-          console.log(err);
-         }
-  });
+    $.ajax({
+        type: "GET",
+        url: "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + artistName + "&apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&size=4&page=" + page,
+        async: true,
+        dataType: "json",
+        success: function(json) {
+            getEvents.json = json;
+            canShowEvents(json);
+        },
+        error: function(xhr, status, err) {
+            console.log(err);
+        }
+    });
 }
 
-function canShowEvents(json){
-    if(json._embedded != null){
+function canShowEvents(json) {
+    if (json._embedded != null) {
         showEvents(json);
-    }else{
+    } else {
         var items = $('#events .list-group-item');
         var item = items.first();
         var i;
-        for(i=0;i<1; i++){
+        for (i = 0; i < 1; i++) {
             item.children('.list-group-item-heading').text("There are no concerts for this artist");
             item.children('.list-group-item-text').text("");
             item.children('.venue').text("");
             item.show();
-            item=item.next();
+            item = item.next();
         }
-        for(i=1;i<items.length; i++){
+        for (i = 1; i < items.length; i++) {
             item.children('.list-group-item-heading').text("");
             item.children('.list-group-item-text').text("");
             item.children('.venue').text("");
             item.show();
-            item=item.next();
+            item = item.next();
         }
-//        for (i = 0;i<items.length; i++) {
-//            console.log("i: "+ i);
-//            console.log("items.length: "+items.length);
-//            if(i=0){
-//                item.children('.list-group-item-heading').text("There are no concerts for this artist");
-//            }else{
-//                item.children('.list-group-item-heading').text("");
-//            };
-//            item.children('.list-group-item-text').text("");
-//            item.children('.venue').text("");
-//            item.show();
-//            item=item.next();
-//        };
+        //        for (i = 0;i<items.length; i++) {
+        //            console.log("i: "+ i);
+        //            console.log("items.length: "+items.length);
+        //            if(i=0){
+        //                item.children('.list-group-item-heading').text("There are no concerts for this artist");
+        //            }else{
+        //                item.children('.list-group-item-heading').text("");
+        //            };
+        //            item.children('.list-group-item-text').text("");
+        //            item.children('.venue').text("");
+        //            item.show();
+        //            item=item.next();
+        //        };
 
 
 
 
-
-//        for (var i=0;i<events.length;i++) {
-//        item.children('.list-group-item-heading').text("There are no concerts for this artist");
-//        item.children('.list-group-item-text').text("There are no concerts for this artist");
-//        item.children('.venue').text("There are no concerts for this artist");
-//    try {
-//      item.children('.venue').text(events[i]._embedded.venues[0].name + " in " + events[i]._embedded.venues[0].city.name);
-//    } catch (err) {
-//      console.log(err);
-//    }
-//        item.children('.list-group-item-text').text("There are no concerts for this artist");
-//    };
-}
+        //        for (var i=0;i<events.length;i++) {
+        //        item.children('.list-group-item-heading').text("There are no concerts for this artist");
+        //        item.children('.list-group-item-text').text("There are no concerts for this artist");
+        //        item.children('.venue').text("There are no concerts for this artist");
+        //    try {
+        //      item.children('.venue').text(events[i]._embedded.venues[0].name + " in " + events[i]._embedded.venues[0].city.name);
+        //    } catch (err) {
+        //      console.log(err);
+        //    }
+        //        item.children('.list-group-item-text').text("There are no concerts for this artist");
+        //    };
+    }
 }
 
 function getDayOfWeek(date) {
-  var dayOfWeek = date.getDay();
-  return isNaN(dayOfWeek) ? null : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][dayOfWeek];
+    var dayOfWeek = date.getDay();
+    return isNaN(dayOfWeek) ? null : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][dayOfWeek];
 }
 
-function getMonth(date){
+function getMonth(date) {
     var month = date.getMonth();
     return isNaN(month) ? null : ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"][month];
+        "July", "August", "September", "October", "November", "December"
+    ][month];
 }
 
 function getFormattedTime(fourDigitTime) {
-    var hours24 = parseInt(fourDigitTime.substring(0, 2),10);
+    var hours24 = parseInt(fourDigitTime.substring(0, 2), 10);
     var hours = ((hours24 + 11) % 12) + 1;
     var amPm = hours24 > 11 ? 'pm' : 'am';
     var minutes = fourDigitTime.substring(2);
@@ -310,70 +308,73 @@ function getFormattedTime(fourDigitTime) {
 
 
 function showEvents(json) {
-  var items = $('#events .list-group-item');
-  items.hide();
+    var items = $('#events .list-group-item');
+    items.hide();
     var events = json._embedded.events;
-  var item = items.first();
-  for (var i=0;i<events.length;i++) {
-    item.children('.list-group-item-heading').text(events[i].name);
+    var item = items.first();
+    for (var i = 0; i < events.length; i++) {
+        item.children('.list-group-item-heading').text(events[i].name);
 
-    var monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"];
-    var date = new Date(events[i].dates.start.localDate);
-//    var day = getDayOfWeek(date);
-//    var month = getMonth(date);
-    var day = date.getDate()+1;
+        var monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        var date = new Date(events[i].dates.start.localDate);
+        //    var day = getDayOfWeek(date);
+        //    var month = getMonth(date);
+        var day = date.getDate() + 1;
 
-    var time = getFormattedTime(events[i].dates.start.localTime);
-    console.log(time);
+        var time = getFormattedTime(events[i].dates.start.localTime);
+        console.log(time);
 
-//    console.log(events[i]);
+        //    console.log(events[i]);
 
 
-//    console.log(events[i]._embedded.venues[0].address.line1);
-//    var year = date.getFullYear();
-    item.children('.list-group-item-text').text(getDayOfWeek(date) + ", " + getMonth(date) + " "+ day + " , "+ date.getFullYear() + " at  " + time);
-      if(events[i].priceRanges != null){
-        item.children('.price-range').text("Price: " + events[i].priceRanges[0].min
-      +" - "+ events[i].priceRanges[0].max + " " + events[i].priceRanges[0].currency);
-      }else{
-          item.children('.price-range').text(" ");
-      };
-//    item.children('.price-range').text("Price: " + events[i].priceRanges[0].max);
-//      + events[i].priceRanges[0].min);
-//      +" - "+ events[i].priceRanges[0].max + " " + events[i].priceRanges[0].currency);
-    try {
-    console.log(events[i]);
-      item.children('.venue').text(events[i]._embedded.venues[0].name + ", " + events[i]._embedded.venues[0].address.line1 + ", " + events[i]._embedded.venues[0].city.name + ", " + events[i]._embedded.venues[0].state.name);
-    } catch (err) {
-      console.log(err);
-        item.children('.venue').text("Cannot find location");
+        //    console.log(events[i]._embedded.venues[0].address.line1);
+        //    var year = date.getFullYear();
+        item.children('.list-group-item-text').text(getDayOfWeek(date) + ", " + getMonth(date) + " " + day + " , " + date.getFullYear() + " at  " + time);
+        if (events[i].priceRanges != null) {
+            item.children('.price-range').text("Price: " + events[i].priceRanges[0].min +
+                " - " + events[i].priceRanges[0].max + " " + events[i].priceRanges[0].currency);
+        } else {
+            item.children('.price-range').text(" ");
+        };
+        //    item.children('.price-range').text("Price: " + events[i].priceRanges[0].max);
+        //      + events[i].priceRanges[0].min);
+        //      +" - "+ events[i].priceRanges[0].max + " " + events[i].priceRanges[0].currency);
+        try {
+            console.log(events[i]);
+            item.children('.venue').text(events[i]._embedded.venues[0].name + ", " + events[i]._embedded.venues[0].address.line1 + ", " + events[i]._embedded.venues[0].city.name + ", " + events[i]._embedded.venues[0].state.name);
+        } catch (err) {
+            console.log(err);
+            item.children('.venue').text("Cannot find location");
+        }
+        item.show();
+        item.off("click");
+        item.click(events[i], function(eventObject) {
+            var url = eventObject.data.url
+            window.location.href = url;
+            //      console.log(eventObject.data);
+            //        alert(eventObject.data.url);
+            try {
+                getAttraction(eventObject.data._embedded.attractions[0].id);
+            } catch (err) {
+                console.log(err);
+            }
+        });
+        item = item.next();
     }
-    item.show();
-    item.off("click");
-    item.click(events[i], function(eventObject) {
-        var url = eventObject.data.url
-        window.location.href = url;
-//      console.log(eventObject.data);
-//        alert(eventObject.data.url);
-      try {
-        getAttraction(eventObject.data._embedded.attractions[0].id);
-      } catch (err) {
-      console.log(err);
-      }
-    });
-    item=item.next();
-  }
 }
- function getNext(){
-     console.log(page);
-     console.log(artist);
+
+function getNext() {
+    console.log(page);
+    console.log(artist);
     getEvents(++page, artist);
- };
-function getPrevious(){
-     //console.log(++page);
+};
+
+function getPrevious() {
+    //console.log(++page);
     getEvents(--page, artist);
- };
+};
 
 //$('#prev').click(function() {
 //  getEvents(--page);
@@ -383,38 +384,38 @@ function getPrevious(){
 //  getEvents(++page, artist);
 //});
 function getAttraction(id) {
-  $.ajax({
-    type:"GET",
-    url:"https://app.ticketmaster.com/discovery/v2/attractions/"+id+".json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG",
-    async:true,
-    dataType: "json",
-    success: function(json) {
-          showAttraction(json);
-         },
-    error: function(xhr, status, err) {
-          console.log(err);
-         }
-  });
+    $.ajax({
+        type: "GET",
+        url: "https://app.ticketmaster.com/discovery/v2/attractions/" + id + ".json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG",
+        async: true,
+        dataType: "json",
+        success: function(json) {
+            showAttraction(json);
+        },
+        error: function(xhr, status, err) {
+            console.log(err);
+        }
+    });
 }
+
 function showAttraction(json) {
-  $('#events-panel').hide();
-  $('#attraction-panel').show();
+    $('#events-panel').hide();
+    $('#attraction-panel').show();
 
-  $('#attraction-panel').click(function() {
-    getEvents(page);
-  });
+    $('#attraction-panel').click(function() {
+        getEvents(page);
+    });
 
-  $('#attraction .list-group-item-heading').first().text(json.name);
-  $('#attraction img').first().attr('src',json.images[0].url);
-  $('#classification').text(json.classifications[0].segment.name + " - " + json.classifications[0].genre.name + " - " + json.classifications[0].subGenre.name);
+    $('#attraction .list-group-item-heading').first().text(json.name);
+    $('#attraction img').first().attr('src', json.images[0].url);
+    $('#classification').text(json.classifications[0].segment.name + " - " + json.classifications[0].genre.name + " - " + json.classifications[0].subGenre.name);
 }
 
 function noAttraction() {
     var noTickets = "There are no concerts for this artist";
     $('#attraction .list-group-item-heading').first().text(noTickets);
 }
-
-    </script>
+</script>
 
 
           <div class="tickets-list">
