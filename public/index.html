@@ -335,7 +335,9 @@ function showEvents(json) {
         //    var year = date.getFullYear();
         item.children('.list-group-item-text').text(getDayOfWeek(date) + ", " + getMonth(date) + " " + day + " , " + date.getFullYear() + " at  " + time);
         
-        item.children('.nick').innerHTML = '<a href="#" class="buyButton"> BUY NOW </a>';
+        var xyz = document.getElementsByClassName('buyDiv')[i];
+        xyz.innerHTML = '<a href="#" class="buyButton"> BUY NOW </a>';
+        console.log(xyz);
         
         if (events[i].priceRanges != null) {
             item.children('.price-range').text("Price: " + events[i].priceRanges[0].min +
@@ -438,7 +440,7 @@ function noAttraction() {
                     </div>
                     <div class="price-range"> </div>
                     <div class="venue"> </div>
-                    <div class="nick">
+                    <div class="buyDiv">
                     </div>
                </div>
               <div href="#" class="list-group-item">
@@ -447,7 +449,7 @@ function noAttraction() {
                     </div>
                     <div class="price-range"> </div>
                     <div class="venue"> </div>
-                    <div class="nick">
+                    <div class="buyDiv">
                     </div>
               </div>
               <div href="#" class="list-group-item">
@@ -456,7 +458,7 @@ function noAttraction() {
                     </div>
                     <div class="price-range"> </div>
                     <div class="venue"> </div>
-                    <div class="nick">
+                    <div class="buyDiv">
                     </div>
               </div>
               <div href="#" class="list-group-item">
@@ -465,7 +467,7 @@ function noAttraction() {
                     </div>
                     <div class="price-range"> </div>
                     <div class="venue"> </div>
-                    <div class="nick">
+                    <div class="buyDiv">
                     </div>              
                 </div>
             </div>
@@ -475,14 +477,12 @@ function noAttraction() {
                 <div class="pageButtons">
                     <button id="prev" class="previous" onclick="getPrevious()"><span aria-hidden="true">&larr;</span></button>
                   <button id="next" class="next" onclick="getNext()"><span aria-hidden="true">&rarr;</span></button>
-<!--
                     <div class="ticketmaster">
-                     Powered by 
+                     Powered by <img id="loginLogo" src="images/tickermasterlogo.png" alt="Tix Logo">
                     </div>
--->
                                         
                 </div>
-                <img id="ticketmasterLogo" href="images/tickermasterlogo.png" alt="ticketmaster">  
+<!--                <img id="ticketmasterLogo" href="images/tickermasterlogo.png" alt="ticketmaster">  -->
 <!--
               <ul class="pager">
 

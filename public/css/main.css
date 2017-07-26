@@ -201,7 +201,7 @@
     display:inline-block;
     width: 60%;
     height: 20px;
-    margin-top:auto;
+    margin-top:10px;
 /*    border: 3px solid #73AD21;*/
     font-size: 15px;
     margin-left:8px;
@@ -212,7 +212,7 @@
 
 .venue{
     order: 3;
-    margin-top: 10px;
+    margin-top: 15px;
     font-family: "Roboto", sans-serif;
     font-size: 70%;
     margin-left: 8px;
@@ -244,14 +244,16 @@
     width:85px;
 }
 
-#nick {
+.buyDiv {
+    color:white;
     position: relative;
 /*    display:inline-block;*/
     clear:both;
     float:right;
 /*    border: 3px solid red;*/
     right:16%;
-    bottom: 35px;
+    bottom: 0px;
+    top: 15px;
 /*    border: 3px solid red;*/
 }
 
