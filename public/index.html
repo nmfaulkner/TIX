@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
-  <head>
+
+<head>
     <script type="text/javascript" src="https://embed.ticketmaster.com/tm.js"></script>
     <title>TIX</title>
     <link rel="shortcut icon" href="images/Tix.png" type="image/x-icon" />
@@ -8,538 +9,423 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans|Josefin+Sans|Raleway|Catamaran|Open+Sans|Source+Sans+Pro|PT+Sans:700|Roboto:300" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<!--    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
     <style type="text/css">
-      #login, #loggedin {
-        display: none;
-      }
-      .text-overflow {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 500px;
-      }
+        #login,
+        #loggedin {
+            display: none;
+        }
+        .text-overflow {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 500px;
+        }
     </style>
 
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
-  </head>
+</head>
 
-  <body class="body">
+<body class="body">
     <div class="container">
-      <div id="login">
-        <h1 class="loginTitle">Tix
+        <div id="login">
+            <h1 class="loginTitle">Tix
             <img id="loginLogo" src="images/Tix.png" alt="Tix Logo">
           </h1>
-          <h2 class="loginSubheading"> The easiest way to find tickets for your favorite artists.
+            <h2 class="loginSubheading"> The easiest way to find tickets for your favorite artists.
           </h2>
-        <a href="/login" class="btn btn-primary">Connect to Spotify</a>
-      </div>
-      <div id="loggedin">
-        <div id="user-profile">
+            <a href="/login" class="btn btn-primary">Connect to Spotify</a>
         </div>
-          <div id="top-artists">
-          </div>
-        <div id="oauth">
-        </div>
+        <div id="loggedin">
+            <div id="user-profile">
+            </div>
+            <div id="top-artists">
+            </div>
+            <div id="oauth">
+            </div>
 
 
-
-<!--
-        <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
-      </div>
-    </div>
--->
-
-    <script id="user-profile-template" type="text/x-handlebars-template">
-        <div class="topnav">
-            <h1 class="topnavLogo">
+            <script id="user-profile-template" type="text/x-handlebars-template">
+                <div class="topnav">
+                    <h1 class="topnavLogo">
                 Tix
             </h1>
 
-            <div class="tixLogo">
-            <img src="images/Tix.png" alt="Spotify Logo" style="width:110px; height:60px;">
-            </div>
+                    <div class="tixLogo">
+                        <img src="images/Tix.png" alt="Spotify Logo" style="width:110px; height:60px;">
+                    </div>
 
-            <div class="topnavText">
-            {{display_name}}
-        </div>
-            <div class="topnavImage">
-            <img src="{{images.0.url}}" hspace="20px" style="width=100%; height:100%;"/>
-        </div>
-        </div>
-<!--      <h1>Logged in as {{display_name}}</h1>-->
-<!--      <div class="media">-->
-<!--
-        <div class="pull-left">
-          <img class="media-object" width="150" src="{{images.0.url}}" />
--->
-<!--        </div>-->
-<!--
-        <div class="media-body">
-          <dl class="dl-horizontal">
-            <dt>Display name</dt><dd class="clearfix">{{display_name}}</dd>
-            <dt>Id</dt><dd>{{id}}</dd>
-            <dt>Link</dt><dd><a href="{{href}}">{{href}}</a></dd>
-          </dl>
-        </div>
--->
-    </script>
+                    <div class="topnavText">
+                        {{display_name}}
+                    </div>
+                    <div class="topnavImage">
+                        <img src="{{images.0.url}}" hspace="20px" style="width=100%; height:100%;" />
+                    </div>
+                </div>
+            </script>
 
 
-    <script id="oauth-template" type="text/x-handlebars-template">
-<!--
-      <h2>oAuth info</h2>
-      <dl class="dl-horizontal">
-        <dt>Access token</dt><dd class="text-overflow">{{access_token}}</dd>
-        <dt>Refresh token</dt><dd class="text-overflow">{{refresh_token}}></dd>
-      </dl>
--->
-    </script>
+            <script id="oauth-template" type="text/x-handlebars-template">
 
-<!--
-     <script id="top-artists-template">
-         <div class="top-artist-heading">
-        <h3> Your Top Artists</h3>
-          </div>
-
-      </script>
--->
+            </script>
 
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-artist = '';
 
-function myFunction() {
-    /**
-     * Obtains parameters from the hash of the URL
-     * @return Object
-     */
-    function getHashParams() {
-        var hashParams = {};
-        var e, r = /([^&;=]+)=?([^&;]*)/g,
-            q = window.location.hash.substring(1);
-        while (e = r.exec(q)) {
-            hashParams[e[1]] = decodeURIComponent(e[2]);
-        }
-        return hashParams;
-    }
-    var userProfileSource = document.getElementById('user-profile-template').innerHTML,
-        userProfileTemplate = Handlebars.compile(userProfileSource),
-        userProfilePlaceholder = document.getElementById('user-profile');
+            <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+            <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script>
+                artist = '';
 
-    var oauthSource = document.getElementById('oauth-template').innerHTML,
-        oauthTemplate = Handlebars.compile(oauthSource),
-        oauthPlaceholder = document.getElementById('oauth');
-    var params = getHashParams();
-    var access_token = params.access_token,
-        refresh_token = params.refresh_token,
-        error = params.error;
-    if (error) {
-        alert('There was an error during the authentication');
-    } else {
-        if (access_token) {
-            // render oauth info
-            oauthPlaceholder.innerHTML = oauthTemplate({
-                access_token: access_token,
-                refresh_token: refresh_token
-            });
-            $.ajax({
-                url: 'https://api.spotify.com/v1/me/top/artists',
-                headers: {
-                    'Authorization': 'Bearer ' + access_token
-                },
-                success: function(response) {
-
-                    var len = response.items.length;
-                    //var hash = [];
-                    var some = '<br>';
-                    for (var i = 0; i < len; i++) {
-
-                        artistName = response.items[i].name;
-
-
-                        some = some + '<button class="artists" onclick="clicked(\'' + artistName + '\')">' + artistName + '</button><br>';
+                function myFunction() {
+                    /**
+                     * Obtains parameters from the hash of the URL
+                     * @return Object
+                     */
+                    function getHashParams() {
+                        var hashParams = {};
+                        var e, r = /([^&;=]+)=?([^&;]*)/g,
+                            q = window.location.hash.substring(1);
+                        while (e = r.exec(q)) {
+                            hashParams[e[1]] = decodeURIComponent(e[2]);
+                        }
+                        return hashParams;
                     }
-                    //                    var element = document.getElementById('top-artists');
-                    //                    element.innerHTML = '<b>Artists</b>: ' + some;
+                    var userProfileSource = document.getElementById('user-profile-template').innerHTML,
+                        userProfileTemplate = Handlebars.compile(userProfileSource),
+                        userProfilePlaceholder = document.getElementById('user-profile');
 
-                    document.getElementById('top-artists').innerHTML = '<b class="top-artists-heading">Your Top Artists</b>: ' + some;
+                    var oauthSource = document.getElementById('oauth-template').innerHTML,
+                        oauthTemplate = Handlebars.compile(oauthSource),
+                        oauthPlaceholder = document.getElementById('oauth');
+                    var params = getHashParams();
+                    var access_token = params.access_token,
+                        refresh_token = params.refresh_token,
+                        error = params.error;
+                    if (error) {
+                        alert('There was an error during the authentication');
+                    } else {
+                        if (access_token) {
+                            // render oauth info
+                            oauthPlaceholder.innerHTML = oauthTemplate({
+                                access_token: access_token,
+                                refresh_token: refresh_token
+                            });
+                            $.ajax({
+                                url: 'https://api.spotify.com/v1/me/top/artists',
+                                headers: {
+                                    'Authorization': 'Bearer ' + access_token
+                                },
+                                success: function(response) {
+
+                                    var len = response.items.length;
+                                    var some = '<br>';
+                                    for (var i = 0; i < len; i++) {
+
+                                        artistName = response.items[i].name;
+
+
+                                        some = some + '<button class="artists" onclick="clicked(\'' + artistName + '\')">' + artistName + '</button><br>';
+                                    }
+
+                                    document.getElementById('top-artists').innerHTML = '<b class="top-artists-heading">Your Top Artists</b>: ' + some;
+                                }
+                            });
+                            $.ajax({
+                                url: 'https://api.spotify.com/v1/me',
+                                headers: {
+                                    'Authorization': 'Bearer ' + access_token
+                                },
+                                success: function(response) {
+                                    userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+                                    $('#login').hide();
+                                    $('#loggedin').show();
+                                }
+                            });
+                        } else {
+                            // render initial screen
+                            $('#login').show();
+                            $('#loggedin').hide();
+                        }
+                    }
                 }
-            });
-            $.ajax({
-                url: 'https://api.spotify.com/v1/me',
-                headers: {
-                    'Authorization': 'Bearer ' + access_token
-                },
-                success: function(response) {
-                    userProfilePlaceholder.innerHTML = userProfileTemplate(response);
-                    //console.log(response);
-                    $('#login').hide();
-                    $('#loggedin').show();
+                myFunction();
+
+                function clicked(artistName) {
+                    var page = 0;
+                    artist = artistName;
+                    getEvents(page, artist);
+                    return false;
                 }
-            });
-        } else {
-            // render initial screen
-            $('#login').show();
-            $('#loggedin').hide();
-        }
-    }
-}
-myFunction();
+                var page = 0;
 
-function clicked(artistName) {
-    //artistName = document.getElementById('').textContent;
-    var page = 0;
-    artist = artistName;
-    getEvents(page, artist);
-    return false;
-}
-//        $('.artists').click(clicked);
-var page = 0;
-
-function getEvents(page, artistName) {
+                function getEvents(page, artistName) {
 
 
-    $('#events-panel').show();
-    $('#attraction-panel').hide();
-    if (page < 0) {
-        page = 0;
-        return;
-    }
+                    $('#events-panel').show();
+                    $('#attraction-panel').hide();
+                    if (page < 0) {
+                        page = 0;
+                        return;
+                    }
 
-    if (page > 0) {
-        if (page > getEvents.json.page.totalPages - 1) {
-            page = 0;
-            return;
-        }
-    }
-
-
-    $.ajax({
-        type: "GET",
-        url: "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + artistName + "&apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&size=4&page=" + page,
-        async: true,
-        dataType: "json",
-        success: function(json) {
-            getEvents.json = json;
-            canShowEvents(json);
-        },
-        error: function(xhr, status, err) {
-            console.log(err);
-        }
-    });
-}
-
-function canShowEvents(json) {
-    if (json._embedded != null) {
-        showEvents(json);
-    } else {
-        var items = $('#events .list-group-item');
-        var item = items.first();
-        var i;
-        for (i = 0; i < 1; i++) {
-            item.children('.list-group-item-heading').text("There are no concerts for this artist");
-            item.children('.list-group-item-text').text("");
-            item.children('.venue').text("");
-            item.children('.price-range').text("");
-            item.show();
-            item = item.next();
-        }
-        for (i = 1; i < items.length; i++) {
-            item.children('.list-group-item-heading').text("");
-            item.children('.list-group-item-text').text("");
-            item.children('.venue').text("");
-            item.children('.price-range').text("");
-            item.show();
-            item = item.next();
-        }
-        //        for (i = 0;i<items.length; i++) {
-        //            console.log("i: "+ i);
-        //            console.log("items.length: "+items.length);
-        //            if(i=0){
-        //                item.children('.list-group-item-heading').text("There are no concerts for this artist");
-        //            }else{
-        //                item.children('.list-group-item-heading').text("");
-        //            };
-        //            item.children('.list-group-item-text').text("");
-        //            item.children('.venue').text("");
-        //            item.show();
-        //            item=item.next();
-        //        };
+                    if (page > 0) {
+                        if (page > getEvents.json.page.totalPages - 1) {
+                            page = 0;
+                            return;
+                        }
+                    }
 
 
+                    $.ajax({
+                        type: "GET",
+                        url: "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + artistName + "&apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&size=4&page=" + page,
+                        async: true,
+                        dataType: "json",
+                        success: function(json) {
+                            getEvents.json = json;
+                            canShowEvents(json);
+                        },
+                        error: function(xhr, status, err) {
+                            console.log(err);
+                        }
+                    });
+                }
+
+                function canShowEvents(json) {
+                    if (json._embedded != null) {
+                        showEvents(json);
+                    } else {
+                        var items = $('#events .list-group-item');
+                        var item = items.first();
+                        var i;
+                        for (i = 0; i < 1; i++) {
+                            item.children('.list-group-item-heading').text("There are no concerts for this artist");
+                            item.children('.list-group-item-text').text("");
+                            item.children('.venue').text("");
+                            item.children('.price-range').text("");
+                            document.getElementsByClassName('buyDiv')[i].innerHTML = '';
+                            item.show();
+                            item = item.next();
+                        }
+                        for (i = 1; i < items.length; i++) {
+                            item.children('.list-group-item-heading').text("");
+                            item.children('.list-group-item-text').text("");
+                            item.children('.venue').text("");
+                            item.children('.price-range').text("");
+                            document.getElementsByClassName('buyDiv')[i].innerHTML = '';
+                            item.show();
+                            item = item.next();
+                        }
+                    }
+                }
+
+                function getDayOfWeek(date) {
+                    var dayOfWeek = date.getDay();
+                    return isNaN(dayOfWeek) ? null : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][dayOfWeek];
+                }
+
+                function getMonth(date) {
+                    var month = date.getMonth();
+                    return isNaN(month) ? null : ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"
+                    ][month];
+                }
+
+                function getFormattedTime(fourDigitTime) {
+                    var hours24 = parseInt(fourDigitTime.substring(0, 2), 10);
+                    var hours = ((hours24 + 11) % 12) + 1;
+                    var amPm = hours24 > 11 ? 'pm' : 'am';
+                    var minutes = fourDigitTime.substring(2);
+
+                    return hours + minutes + amPm;
+                };
 
 
-        //        for (var i=0;i<events.length;i++) {
-        //        item.children('.list-group-item-heading').text("There are no concerts for this artist");
-        //        item.children('.list-group-item-text').text("There are no concerts for this artist");
-        //        item.children('.venue').text("There are no concerts for this artist");
-        //    try {
-        //      item.children('.venue').text(events[i]._embedded.venues[0].name + " in " + events[i]._embedded.venues[0].city.name);
-        //    } catch (err) {
-        //      console.log(err);
-        //    }
-        //        item.children('.list-group-item-text').text("There are no concerts for this artist");
-        //    };
-    }
-}
+                function showEvents(json) {
+                    var items = $('#events .list-group-item');
+                    items.hide();
+                    var events = json._embedded.events;
+                    var item = items.first();
+                    for (var i = 0; i < events.length; i++) {
+                        item.children('.list-group-item-heading').text(events[i].name);
 
-function getDayOfWeek(date) {
-    var dayOfWeek = date.getDay();
-    return isNaN(dayOfWeek) ? null : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][dayOfWeek];
-}
+                        var monthNames = ["January", "February", "March", "April", "May", "June",
+                            "July", "August", "September", "October", "November", "December"
+                        ];
+                        var date = new Date(events[i].dates.start.localDate);
+                        var day = date.getDate() + 1;
 
-function getMonth(date) {
-    var month = date.getMonth();
-    return isNaN(month) ? null : ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ][month];
-}
+                        var time = getFormattedTime(events[i].dates.start.localTime);
 
-function getFormattedTime(fourDigitTime) {
-    var hours24 = parseInt(fourDigitTime.substring(0, 2), 10);
-    var hours = ((hours24 + 11) % 12) + 1;
-    var amPm = hours24 > 11 ? 'pm' : 'am';
-    var minutes = fourDigitTime.substring(2);
+                        item.children('.list-group-item-text').text(getDayOfWeek(date) + ", " + getMonth(date) + " " + day + " , " + date.getFullYear() + " at  " + time);
 
-    return hours + minutes + amPm;
-};
+                        document.getElementsByClassName('buyDiv')[i].innerHTML = '<a href="#" class="buyButton"> BUY NOW </a>';
 
+                        if (events[i].priceRanges != null) {
+                          if(events[i].priceRanges[0].min == events[i].priceRanges[0].max ){
+                            item.children('.price-range').text("Price: " + events[i].priceRanges[0].min + " " + events[i].priceRanges[0].currency);
+                          }else{
+                            item.children('.price-range').text("Price: " + events[i].priceRanges[0].min +
+                                " - " + events[i].priceRanges[0].max + " " + events[i].priceRanges[0].currency);
+                              };
+                        } else {
+                            item.children('.price-range').text(" ");
+                        };
+                        try {
+                            item.children('.venue').text(events[i]._embedded.venues[0].name + ", " + events[i]._embedded.venues[0].address.line1 + ", " + events[i]._embedded.venues[0].city.name + ", " + events[i]._embedded.venues[0].state.name);
+                        } catch (err) {
+                            item.children('.venue').text("Cannot find location");
+                        }
+                        item.show();
+                        item.off("click");
+                        item.click(events[i], function(eventObject) {
+                            var url = eventObject.data.url
+                            window.location.href = url;
+                            try {
+                                getAttraction(eventObject.data._embedded.attractions[0].id);
+                            } catch (err) {
+                                console.log(err);
+                            }
+                        });
+                        item = item.next();
+                    }
+                }
 
-function showEvents(json) {
-    var items = $('#events .list-group-item');
-    items.hide();
-    var events = json._embedded.events;
-    var item = items.first();
-    for (var i = 0; i < events.length; i++) {
-        item.children('.list-group-item-heading').text(events[i].name);
+                function getNext() {
+                    getEvents(++page, artist);
+                };
 
-        var monthNames = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
-        var date = new Date(events[i].dates.start.localDate);
-        //    var day = getDayOfWeek(date);
-        //    var month = getMonth(date);
-        var day = date.getDate() + 1;
+                function getPrevious() {
+                    getEvents(--page, artist);
+                };
 
-        var time = getFormattedTime(events[i].dates.start.localTime);
-        console.log(time);
+                function getAttraction(id) {
+                    $.ajax({
+                        type: "GET",
+                        url: "https://app.ticketmaster.com/discovery/v2/attractions/" + id + ".json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG",
+                        async: true,
+                        dataType: "json",
+                        success: function(json) {
+                            showAttraction(json);
+                        },
+                        error: function(xhr, status, err) {
+                            console.log(err);
+                        }
+                    });
+                }
 
-        //    console.log(events[i]);
+                function showAttraction(json) {
+                    $('#events-panel').hide();
+                    $('#attraction-panel').show();
 
+                    $('#attraction-panel').click(function() {
+                        getEvents(page);
+                    });
 
-        //    console.log(events[i]._embedded.venues[0].address.line1);
-        //    var year = date.getFullYear();
-        item.children('.list-group-item-text').text(getDayOfWeek(date) + ", " + getMonth(date) + " " + day + " , " + date.getFullYear() + " at  " + time);
-        
-        var xyz = document.getElementsByClassName('buyDiv')[i];
-        xyz.innerHTML = '<a href="#" class="buyButton"> BUY NOW </a>';
-        console.log(xyz);
-        
-        if (events[i].priceRanges != null) {
-            item.children('.price-range').text("Price: " + events[i].priceRanges[0].min +
-                " - " + events[i].priceRanges[0].max + " " + events[i].priceRanges[0].currency);
-        } else {
-            item.children('.price-range').text(" ");
-        };
-        //    item.children('.price-range').text("Price: " + events[i].priceRanges[0].max);
-        //      + events[i].priceRanges[0].min);
-        //      +" - "+ events[i].priceRanges[0].max + " " + events[i].priceRanges[0].currency);
-        try {
-            console.log(events[i]);
-            item.children('.venue').text(events[i]._embedded.venues[0].name + ", " + events[i]._embedded.venues[0].address.line1 + ", " + events[i]._embedded.venues[0].city.name + ", " + events[i]._embedded.venues[0].state.name);
-        } catch (err) {
-            console.log(err);
-            item.children('.venue').text("Cannot find location");
-        }
-        item.show();
-        item.off("click");
-        item.click(events[i], function(eventObject) {
-            var url = eventObject.data.url
-            window.location.href = url;
-            //      console.log(eventObject.data);
-            //        alert(eventObject.data.url);
-            try {
-                getAttraction(eventObject.data._embedded.attractions[0].id);
-            } catch (err) {
-                console.log(err);
-            }
-        });
-        item = item.next();
-    }
-}
+                    $('#attraction .list-group-item-heading').first().text(json.name);
+                    $('#attraction img').first().attr('src', json.images[0].url);
+                    $('#classification').text(json.classifications[0].segment.name + " - " + json.classifications[0].genre.name + " - " + json.classifications[0].subGenre.name);
+                }
 
-function getNext() {
-    console.log(page);
-    console.log(artist);
-    getEvents(++page, artist);
-};
-
-function getPrevious() {
-    //console.log(++page);
-    getEvents(--page, artist);
-};
-
-//$('#prev').click(function() {
-//  getEvents(--page);
-//});
-//$('#next').click(function() {
-//    console.log(++page, artist);
-//  getEvents(++page, artist);
-//});
-function getAttraction(id) {
-    $.ajax({
-        type: "GET",
-        url: "https://app.ticketmaster.com/discovery/v2/attractions/" + id + ".json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG",
-        async: true,
-        dataType: "json",
-        success: function(json) {
-            showAttraction(json);
-        },
-        error: function(xhr, status, err) {
-            console.log(err);
-        }
-    });
-}
-
-function showAttraction(json) {
-    $('#events-panel').hide();
-    $('#attraction-panel').show();
-
-    $('#attraction-panel').click(function() {
-        getEvents(page);
-    });
-
-    $('#attraction .list-group-item-heading').first().text(json.name);
-    $('#attraction img').first().attr('src', json.images[0].url);
-    $('#classification').text(json.classifications[0].segment.name + " - " + json.classifications[0].genre.name + " - " + json.classifications[0].subGenre.name);
-}
-
-function noAttraction() {
-    var noTickets = "There are no concerts for this artist";
-    $('#attraction .list-group-item-heading').first().text(noTickets);
-}
-</script>
+                function noAttraction() {
+                    var noTickets = "There are no concerts for this artist";
+                    $('#attraction .list-group-item-heading').first().text(noTickets);
+                }
+            </script>
 
 
-          <div class="tickets-list">
-      <div class="row">
-        <div class="col-xs-6">
-        <div id='events-panel' class="panel panel-primary">
-          <div class="panel-heading">
-<!--            <h3 class="panel-title">Events</h3>-->
-          </div>
-          <div class="panel-body">
-            <div id="events" class="list-group">
-              <div class="list-group-item">
-                    <div class="list-group-item-heading">No artist Selected </div>
-                    <div class="list-group-item-text">
+            <div class="tickets-list">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div id='events-panel' class="panel panel-primary">
+                            <div class="panel-heading">
+                            </div>
+                            <div class="panel-body">
+                                <div id="events" class="list-group">
+                                    <div class="list-group-item">
+                                        <div class="list-group-item-heading">No artist Selected </div>
+                                        <div class="list-group-item-text">
+                                        </div>
+                                        <div class="price-range"> </div>
+                                        <div class="venue"> </div>
+                                        <div class="buyDiv">
+                                        </div>
+                                    </div>
+                                    <div href="#" class="list-group-item">
+                                        <div class="list-group-item-heading">No artist Selected </div>
+                                        <div class="list-group-item-text">
+                                        </div>
+                                        <div class="price-range"> </div>
+                                        <div class="venue"> </div>
+                                        <div class="buyDiv">
+                                        </div>
+                                    </div>
+                                    <div href="#" class="list-group-item">
+                                        <div class="list-group-item-heading">No artist Selected </div>
+                                        <div class="list-group-item-text">
+                                        </div>
+                                        <div class="price-range"> </div>
+                                        <div class="venue"> </div>
+                                        <div class="buyDiv">
+                                        </div>
+                                    </div>
+                                    <div href="#" class="list-group-item">
+                                        <div class="list-group-item-heading">No artist Selected </div>
+                                        <div class="list-group-item-text">
+                                        </div>
+                                        <div class="price-range"> </div>
+                                        <div class="venue"> </div>
+                                        <div class="buyDiv">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <nav>
+                                    <div class="pageButtons">
+                                        <button id="prev" class="previous" onclick="getPrevious()"><span aria-hidden="true">&larr;</span>
+                                        </button>
+                                        <button id="next" class="next" onclick="getNext()"><span aria-hidden="true">&rarr;</span>
+                                        </button>
+
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
-                    <div class="price-range"> </div>
-                    <div class="venue"> </div>
-                    <div class="buyDiv">
-                    </div>
-               </div>
-              <div href="#" class="list-group-item">
-                    <div class="list-group-item-heading">No artist Selected </div>
-                    <div class="list-group-item-text">
-                    </div>
-                    <div class="price-range"> </div>
-                    <div class="venue"> </div>
-                    <div class="buyDiv">
-                    </div>
-              </div>
-              <div href="#" class="list-group-item">
-                    <div class="list-group-item-heading">No artist Selected </div>
-                    <div class="list-group-item-text">
-                    </div>
-                    <div class="price-range"> </div>
-                    <div class="venue"> </div>
-                    <div class="buyDiv">
-                    </div>
-              </div>
-              <div href="#" class="list-group-item">
-                    <div class="list-group-item-heading">No artist Selected </div>
-                    <div class="list-group-item-text">
-                    </div>
-                    <div class="price-range"> </div>
-                    <div class="venue"> </div>
-                    <div class="buyDiv">
-                    </div>              
                 </div>
             </div>
-          </div>
-          <div class="panel-footer">
-            <nav>
-                <div class="pageButtons">
-                    <button id="prev" class="previous" onclick="getPrevious()"><span aria-hidden="true">&larr;</span></button>
-                  <button id="next" class="next" onclick="getNext()"><span aria-hidden="true">&rarr;</span></button>
-                    <div class="ticketmaster">
-                     Powered by <img id="ticketmasterLogo" src="images/tickermasterlogo.png" alt="Tix Logo" style="width:60px;height:55px;">
+
+            <div style="clear: both"></div>
+            <footer>
+
+                <div class="footerText">
+                    <p>
+                        Tix was created by Nick Faulkner. Powered by:
+                    </p>
+                    <div class="poweredBy">
+                        <img id="SpotifyLogo" src="images/spotifyIcon.png" alt="Spotify Logo" style="width:85px;height:85px;">
+                        <img id="ticketmasterLogo" src="images/tickermasterlogo.png" alt="Ticketmaster Logo" style="width:85px;height:85px;">
                     </div>
-                                        
+                    <p>
+                        Feel free to reach out to Nick:
+                    </p>
                 </div>
-<!--                <img id="ticketmasterLogo" href="images/tickermasterlogo.png" alt="ticketmaster">  -->
-<!--
-              <ul class="pager">
 
-                  <button id="prev" class="previous" onclick="getPrevious()"><span aria-hidden="true">&larr;</span></button>
-                  <button id="next" class="next" onclick="getNext()"><span aria-hidden="true">&rarr;</span></button>
+                <div class="contacts">
+                    <a href="https://www.linkedin.com/in/nmfaulkner/" class="fa fa-linkedin" style="font-size:45px;"></a>
+                    <a href="https://github.com/nmfaulkner" style="font-size:45px;" class="fa fa-github"></a>
+                </div>
 
-                <li id="prev" class="previous"><button class="previous" onclick="getPrevious()"><span aria-hidden="true">&larr;</span></button></li>
-                <li id="next" class="next"><button class="next" onclick="getNext()"><span aria-hidden="true">&rarr;</span></button></li>
-              </ul>
--->
-            </nav>
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
+                <div class="copyright">
+                    <p>
+                        &copy; 2017 Nick Faulkner. All Rights Reserved
+                    </p>
+                </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<!--
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-     Latest compiled and minified JavaScript
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
--->
+            </footer>
 
 
-<!--
-    <div w-type="event-discovery" w-tmapikey="UT2W2q9vn88jkSFKJmioRT4GplnM9VHX" w-googleapikey="YOUR_GOOGLE_API_KEY" w-keyword="" w-theme="listview" w-colorscheme="dark" w-width="350" w-height="600" w-size="25" w-border="2" w-borderradius="4" w-postalcode="" w-radius="" w-period="week" w-layout="vertical" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="custom" w-titlelink="off" w-countrycode="US" w-source="" w-latlong=""></div>
-
-
-
-    <script src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
--->
-
-     <div style="clear: both"></div>
-    <footer>
-
-      <div class="footerText">
-        <p>
-          Tix was created by Nick Faulkner. Feel free to reach out Nick:
-        </p>
-      </div>
-
-     <div class="contacts">
-    <a href="https://www.linkedin.com/in/nmfaulkner/" class="fa fa-linkedin" style="font-size:45px;"></a>
-    <a href="https://github.com/nmfaulkner" style="font-size:45px;" class="fa fa-github"></a>
-        </div>
-
-        <div class="copyright">
-        <p>
-          &copy; 2017 Nick Faulkner. All Rights Reserved
-        </p>
-      </div>
-
-    </footer>
-
-
-  </body>
+</body>
 
 
 </html>

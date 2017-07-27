@@ -191,9 +191,9 @@
     overflow-x: scroll;
     white-space: nowrap;
     font-size:110%;
-    margin-top: 5px;
+    margin-top: 12.5px;
     width:95%;
-    margin-left: 8px;
+    margin-left: 20px;
 }
 
 
@@ -204,8 +204,8 @@
     margin-top:10px;
 /*    border: 3px solid #73AD21;*/
     font-size: 15px;
-    margin-left:8px;
-    
+    margin-left:20px;
+
 
 }
 
@@ -215,7 +215,7 @@
     margin-top: 15px;
     font-family: "Roboto", sans-serif;
     font-size: 70%;
-    margin-left: 8px;
+    margin-left: 20px;
     width: 55%;
     display: inline-block;
 /*    border: 3px solid red;*/
@@ -346,18 +346,7 @@
     background-color: #bfbfbf;
 }
 
-.ticketmaster{
-    float: right;
-}
 
-#ticketmasterLogo{
-    height: 100%;
-    width:100%;
-}
-
-.ticketmaster{
-    color:white;
-}
 
 
 
@@ -441,9 +430,9 @@ footer{
 }
 
 .fa {
-    padding-top: 15px;
-    width:80px;
-    height:60px;
+    padding-top: 10px;
+    width:65px;
+    height:50px;
     text-decoration: none;
 }
 
@@ -464,10 +453,23 @@ footer{
   margin-left: 3px;
 }
 
+.poweredBy{
+  margin-top:10px;
+  margin-bottom: 25px;
+}
+
+#SpotifyLogo{
+  margin-right: 5px;
+}
+
+#ticketmasterLogo{
+  margin-left: 5px;
+}
+
 .footerText{
   color:white;
   text-align:center;
-  padding-top:150px;
+  padding-top:90px;
   /*font-family: 'Catamaran', sans-serif;*/
   font-size:20px;
 }
@@ -475,5 +477,5 @@ footer{
 .copyright{
   color:white;
   text-align:center;
-  margin-top:80px;
+  margin-top:60px;
 }
