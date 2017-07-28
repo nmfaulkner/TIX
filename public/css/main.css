@@ -188,7 +188,7 @@
 }
 
 .list-group-item-heading{
-    overflow-x:auto;
+    overflow-x:hidden;
     white-space: nowrap;
     font-size:110%;
     margin-top: 12.5px;
