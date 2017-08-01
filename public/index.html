@@ -32,6 +32,8 @@
   ga('send', 'pageview');
 
 </script>
+    
+    <script type="text/javascript" src="https://embed.ticketmaster.com/tm.js"></script>
 
 </head>
 
@@ -84,7 +86,9 @@
             <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script>
+                
                 artist = '';
+                concertLocation = '';
 
                 function myFunction() {
                     /**
@@ -163,12 +167,16 @@
                 function clicked(artistName) {
                     var page = 0;
                     artist = artistName;
-                    getEvents(page, artist);
+                    getEvents(page, artist, concertLocation);
                     return false;
                 }
                 var page = 0;
 
-                function getEvents(page, artistName) {
+                function getEvents(page, artistName, location) {
+                    console.log("Location: "+document.getElementById("search").value);
+                    
+//                    console.log(page, artistName, location);
+//                    console.log("Events:", artist);
 
 
                     $('#events-panel').show();
@@ -188,7 +196,7 @@
 
                     $.ajax({
                         type: "GET",
-                        url: "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + artistName + "&apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&size=4&page=" + page,
+                        url: "https://app.ticketmaster.com/discovery/v2/events.json?keyword="+ artistName + "&city="+location+"&apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&size=4&page=" + page,
                         async: true,
                         dataType: "json",
                         success: function(json) {
@@ -269,7 +277,7 @@
 
                         item.children('.list-group-item-text').text(getDayOfWeek(date) + ", " + getMonth(date) + " " + day + " , " + date.getFullYear() + " at  " + time);
 
-                        document.getElementsByClassName('buyDiv')[i].innerHTML = '<a href="#" class="buyButton"> BUY NOW </a>';
+                        document.getElementsByClassName('buyDiv')[i].innerHTML = '<a href="'+events[i].url+'" class="buyButton"> BUY NOW </a>';
 
                         if (events[i].priceRanges != null) {
                           if(events[i].priceRanges[0].min == events[i].priceRanges[0].max ){
@@ -293,6 +301,7 @@
                             window.location.href = url;
                             try {
                                 getAttraction(eventObject.data._embedded.attractions[0].id);
+                                artistId = eventObject.data._embedded.attractions[0].id;
                             } catch (err) {
                                 console.log(err);
                             }
@@ -302,14 +311,15 @@
                 }
 
                 function getNext() {
-                    getEvents(++page, artist);
+                    getEvents(++page, artist, concertLocation);
                 };
 
                 function getPrevious() {
-                    getEvents(--page, artist);
+                    getEvents(--page, artist, concertLocation);
                 };
 
-                function getAttraction(id) {
+                function getAttraction(id, location) {
+//                    alert(location);
                     $.ajax({
                         type: "GET",
                         url: "https://app.ticketmaster.com/discovery/v2/attractions/" + id + ".json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG",
@@ -341,6 +351,36 @@
                     var noTickets = "There are no concerts for this artist";
                     $('#attraction .list-group-item-heading').first().text(noTickets);
                 }
+                
+                function locationSearch() {
+                    //event.preventDefault();
+//                    alert(document.getElementById("search").value);
+//                    console.log(document.getElementById("search").value);
+//                    console.log(artist);
+                    console.log("Location: "+document.getElementById("search").value);
+                    
+                    if(document.getElementById("search").value == null){
+                        concertLocation = " ";
+                    }else{
+                        concertLocation = document.getElementById("search").value;
+                    };
+                    
+                    getEvents(0, artist, document.getElementById("search").value);
+//                    alert(document.getElementById("search").value);
+//                    var location = document.getElementByid("search").value;
+//                    alert(location);
+                    
+                }
+                
+//                document.getElementById("search").addEventListener("keyup", function(event) {
+//                    event.preventDefault();
+//                    if (event.keyCode == 13) {
+//                        console.log("hello");
+//                    locationSearch();
+//                    }
+//                });
+                
+            
             </script>
 
 
@@ -349,6 +389,18 @@
                     <div class="col-xs-6">
                         <div id='events-panel' class="panel panel-primary">
                             <div class="panel-heading">
+                                <form id="searchSection">
+                                    <input id="search" type="text" placeholder="Location">
+                                    <button id="searchButton" onclick="locationSearch()">
+                                        Search
+                                    </button>
+                                </form>
+                                <div class="pageButtons">
+                                <button id="prev" class="previous" onclick="getPrevious()"><span aria-hidden="true">&larr;</span>
+                                </button>
+                                <button id="next" class="next" onclick="getNext()"><span aria-hidden="true">&rarr;</span>
+                                </button>
+                                    </div>
                             </div>
                             <div class="panel-body">
                                 <div id="events" class="list-group">
@@ -390,6 +442,7 @@
                                     </div>
                                 </div>
                             </div>
+<!--
                             <div class="panel-footer">
                                 <nav>
                                     <div class="pageButtons">
@@ -401,6 +454,7 @@
                                     </div>
                                 </nav>
                             </div>
+-->
                         </div>
                     </div>
                 </div>

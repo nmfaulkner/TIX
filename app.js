@@ -14,7 +14,8 @@ var cookieParser = require('cookie-parser');
 
 var client_id = '3344fc71041c48deb91505cd094923fc'; // Your client id
 var client_secret = 'f30181b053144371a558dfae7c592213'; // Your secret
-var redirect_uri = 'https://tixconcerts.herokuapp.com/callback'; // Your redirect uri
+var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
+//var redirect_uri = 'https://tixconcerts.herokuapp.com/callback'; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
@@ -143,5 +144,8 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
-console.log('Listening on 5000');
-app.listen(process.env.PORT || 5000);
+//console.log('Listening on 5000');
+//app.listen(process.env.PORT || 5000);
+
+console.log('Listening on 8888');
+app.listen(8888);

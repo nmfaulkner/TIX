@@ -156,6 +156,41 @@
     background-color: rgba(51, 51, 51, .9);
 }
 
+form{
+    width: 70%;
+    display: flex;
+}
+
+input[type=text] {
+    margin-left: 20px;
+    margin-top:12.5px;
+    margin-right: 5px;
+    width: 150px;
+    box-sizing: border-box;
+/*    border: 2px solid #ccc;*/
+/*    border-radius: 4px;*/
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 30px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 65%;
+}
+
+#searchButton{
+    background-color: black;
+    margin-top: 12.5px;
+    color:white;
+    height:47px;
+    width:60px;
+    font-family: 'Catamaran', sans-serif;
+}
+
 .panel-title{
     text-align: center;
     font-family: 'Catamaran', sans-serif;
@@ -164,6 +199,10 @@
     margin-bottom: 1%;
     margin-top: 1%;
     font-size: 35px;
+}
+
+.panel-heading {
+    display: flex;
 }
 
 .tickets-list{
@@ -253,7 +292,7 @@
 /*    border: 3px solid red;*/
     right:16%;
     bottom: 0px;
-    top: 15px;
+    top: 10px;
 /*    border: 3px solid red;*/
 }
 
@@ -317,26 +356,32 @@
     height: 40px;
     text-align: center;
     margin: 0 auto;
-    margin-top: 5px;
+/*    margin-top: 5px;*/
     list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 12.5px;
+    margin-right: 80px;
 }
-
-.next {
-    width: 70px;
-    height: 40px;
-    margin-left: 5px;
-    background-color: #808080;
-    font-size: 20px;
-
-}
-
 .previous{
-    width: 70px;
-    height:40px;
+    width: 60px;
+    height:47px;
     margin-right: 5px;
     background-color: #808080;
     font-size: 20px;
+    float:right;
 }
+
+.next {
+    width: 60px;
+    height: 47px;
+    margin-left: 5px;
+    background-color: #808080;
+    font-size: 20px;
+    float:right;
+
+}
+
 
 .next:hover{
     background-color: #bfbfbf;
