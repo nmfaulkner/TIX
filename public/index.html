@@ -33,7 +33,7 @@
 
 </script>
     
-<!--    <script type="text/javascript" src="https://embed.ticketmaster.com/tm.js"></script>-->
+    <script type="text/javascript" src="https://embed.ticketmaster.com/tm.js"></script>
 
 </head>
 
@@ -277,7 +277,7 @@
 
                         item.children('.list-group-item-text').text(getDayOfWeek(date) + ", " + getMonth(date) + " " + day + " , " + date.getFullYear() + " at  " + time);
 
-                        document.getElementsByClassName('buyDiv')[i].innerHTML = '<a href="'+events[i].url+'" class="buyButton"> BUY NOW </a>';
+                        document.getElementsByClassName('buyDiv')[i].innerHTML = '<a data-enable-widget href="'+events[i].url+'?enable-widget=true" class="buyButton"> BUY NOW </a>';
 
                         if (events[i].priceRanges != null) {
                           if(events[i].priceRanges[0].min == events[i].priceRanges[0].max ){
@@ -296,16 +296,16 @@
                         }
                         item.show();
                         item.off("click");
-                        item.click(events[i], function(eventObject) {
-                            var url = eventObject.data.url
-                            window.location.href = url;
-                            try {
-                                getAttraction(eventObject.data._embedded.attractions[0].id);
-                                artistId = eventObject.data._embedded.attractions[0].id;
-                            } catch (err) {
-                                console.log(err);
-                            }
-                        });
+//                        item.click(events[i], function(eventObject) {
+//                            var url = eventObject.data.url
+//                            window.location.href = url;
+//                            try {
+//                                getAttraction(eventObject.data._embedded.attractions[0].id);
+//                                artistId = eventObject.data._embedded.attractions[0].id;
+//                            } catch (err) {
+//                                console.log(err);
+//                            }
+//                        });
                         item = item.next();
                     }
                 }
